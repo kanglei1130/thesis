@@ -1,0 +1,243 @@
+
+\chapter{Related Work}
+
+\section{Economic Driving}
+
+\subsection{Cruise Control}
+
+%\textbf{Cruise Control}. 
+Cruise control \cite{cruise_control} is a system that automatically
+controls the vehicle to drive in a certain speed. 
+\cite{bengtsson2001adaptive} introduces Adaptive Cruise Control (ACC)
+that adjusts vehicle speed based on distance to cars ahead
+by using radar. 
+\cite{lin2009effects} studies the effects of time-gap
+settings of adaptive cruise control on driving performance
+in a bus driving simulator. 
+\cite{loos2011adaptive} studies a distributed car control system
+that every car is controlled by adaptive cruise control. 
+\cite{ioannou1993autonomous} develops an intelligent cruise control system 
+for automatic vehicles and verify the effectiveness of the system
+under emergency situations by simulation.  
+EcoDrive is more fuel efficient than adaptive cruise control 
+in two ways. 
+First, EcoDrive is able to improve fuel efficiency by 
+adjusting speed according to road conditions and vehicle types. 
+Second, EcoDrive tracks the fuel efficiency under different cruising
+speeds and provides a tradeoff between fuel efficiency and travel time. 
+
+\subsection{Fuel Efficiency Enhancement}
+
+%\textbf{Fuel Efficiency Enhancement}. 
+Increasing vehicular fuel efficiency has been a topic 
+of much recent research \cite{ganti2010greengps, koukoumidis2011signalguru, 
+boriboonsomsin2010eco, tulusan2012providing}.
+GreenGPS \cite{ganti2010greengps} requires a fuel map server
+to record the statistical route fuel usage and calculate the most
+fuel efficient route for drivers. 
+SignalGuru \cite{koukoumidis2011signalguru} requires vehicles sharing
+traffic light information so that drivers can adjust the speed of
+the vehicle to avoid stops in front of traffic lights. 
+\cite{boriboonsomsin2010eco} uses an on-board eco-driving device 
+that provides instantaneous fuel economy
+feedback affects driving behaviors, and consequently fuel economy. 
+\cite{tulusan2012providing} evaluates the impacts of a smartphone application
+on driving behaviors to enhance fuel efficiency. 
+Different from existing approaches that are focusing on advising human drivers to adjust driving behaviors, 
+EcoDrive is designed to assist human drivers.
+Both \cite{lang2013opportunities} and \cite{lang2014prediction} show that some reduction of fuel consumption can be achieved
+by vehicle-to-vehicle communication. 
+
+\subsection{Vehicle Force Modeling}
+
+%\textbf{Vehicle Dynamics Modeling}. 
+\cite{andersson2012online} models rolling resistance and air drag based on some measurements 
+on the vehicle, e.g., effective areas to model air drag. 
+\cite{zanasi2001dynamic} models vehicle transmission system based on gear sizes. 
+\cite{canudas1999dynamic} models tire friction based on tire parameters, e.g., radius. 
+\cite{brusamarello2010dynamic} presents an electronic system attached on wheel to measure and
+monitor of the torque transmitted to the wheel of a moving vehicle.
+\cite{vong2006prediction} models engine torque and horsepower by RPM when the
+engine is not connected with transmission. 
+Our model uses the parameters available on car CAN bus to find the relations between fuel consumption and vehicle speed changes.
+Different from existing work, 
+our model does not rely on the detail physics properties of the car, 
+e.g., tire radius and transmission gear size etc.
+
+
+
+
+\section{Vehicle Dynamics Sensing}
+
+\subsection{Coordinate Alignment and Estimation}
+
+Estimating smartphone orientation is critical 
+for object tracking and has also been an active research area. 
+The related efforts can be categorized into two main approaches:
+absolute coordinates estimation and relative coordinates estimation.
+Absolute coordinates estimation is usually used for 
+walking direction estimation \cite{shen2013walkie, zhou2014use} etc. 
+It is a challenging task due to the limited precision
+and accumulated error of IMU sensors \cite{zhou2014use}. 
+Using smartphone sensors to track vehicle motions 
+is more challenging due to an extra relative orientation
+alignment step, i.e., the alignment from smartphone coordinates
+to the car's coordinates.
+Both steps may introduce errors into the estimation. 
+The existing alignment algorithms require
+extra inputs, i.e., GPS assistance \cite{Mohan2008Nericell},
+offline training \cite{yang2015low}, 
+or focus on a one-dimensional motion like lane change and turn 
+\cite{wang2013sensing, chen2015invisible}.
+However, none of the existing work addressed the challenges caused
+by road slopes and misalignment. 
+
+
+\subsection{Capturing Driving Behaviors}
+
+Capturing driving behaviors by smartphones are of interest
+to both academia \cite{wang2013sensing, chen2015invisible} 
+and industry \cite{uber, cmtelematics}. 
+\cite{wang2013sensing} captures turns to determine driver phone
+use by comparing centrifugal force with a reference point. 
+\cite{chen2015invisible} develops a middleware that can detect 
+and differentiate various vehicle maneuvers, 
+including lane changes, turns, and driving on curvy roads,
+by using non-vision sensors.
+They capture steering events utilizing the z-axis of the gyroscope.
+These work rely on the gyroscope and are not 
+discussing the problem caused by gravitational force. 
+Our software module can accurately estimate vehicle motion
+parameters, which can be used as inputs to 
+capture driving behavior more accurately. 
+
+\subsection{Vehicular Applications of IMU Sensors}
+
+The IMU sensors in smartphones enable lots of applications
+including road condition detection \cite{Mohan2008Nericell},
+3D road modeling \cite{yang2015low}, vehicular speed estimation \cite{hansenspeed}.
+\cite{Mohan2008Nericell} tracks road surface like 
+potholes by using accelerometer and GPS.
+\cite{yang2015low} builds road 3D models by using IMU sensors on  a smartphone, but it requires the driver to drive 
+around a building to calibrate the magnetic sensor. 
+\cite{hansenspeed} uses an accelerometer to estimate speed 
+where the GPS is inaccurate. 
+Different from these work, the focus of this work is 
+conducting coordinate alignment efficiently and estimating the linear acceleration of the vehicle.
+We believe our module can provide input for vehicular applications 
+to achieve better efficiency. 
+
+
+
+
+\subsection{Live Video Streaming}
+\nop{
+Internet video streaming protocols can be classified into
+two major fields based on application scenarios.
+One set of protocols is streaming pre-recorded video 
+over Internet, such as YouTube and Netflix \cite{rao2011network}.
+Another set of protocols is streaming live video, 
+which are also known
+as Voice over Internet Protocol (VoIP), 
+such as Skype and Google Hangouts 
+\cite{yu2014can, xu2012video, zhang2012profiling}.
+Streaming recorded video meets with TCP-like protocols in their nature, 
+i.e., video streaming adopts pre-fetching and buffering 
+to achieve smooth play-out.
+Hulu \cite{adhikari2015measurement} uses 
+encrypted RTMP (Real Time Messaging Protocol).
+Youtube is using Real Time Streaming Protocol (RTSP) 
+and Netflix is using TCP \cite{rao2011network}
+}
+
+Measuring live streaming applications such as Skype and Hangout
+is an active area of research. 
+Streaming live video is sensitive to network latency,
+so such applications use UDP-like protocols by default
+and switch to TCP if UDP is 
+blocked \cite{yu2014can, xu2012video, zhang2012profiling}.
+\cite{li2017measurement} measures the performance of Skype 
+over today's LTE networks and illustrate the inefficiencies of Skype protocols.
+\cite{yu2014can} measures video quality of different 
+VoIP applications over wireless and mobile networks. 
+\cite{xu2012video} measures the design choices and 
+performance of Skype, iChat and Google+ 
+under a wide range of ``best-effort'' network conditions.
+\cite{zhang2012profiling} measures how Skype adjusts its sending rate, FEC redundancy,
+video rate and frame rate under various packet loss rate, 
+propagation delay and available network bandwidth.
+Our live streaming framework has similar network protocol
+requirements with VoIP application, 
+the implementation and context-aware video encoding algorithm
+differentiate us from the measurement study of exisiting
+VoIP services. 
+Real time streaming of pre-recorded video such as YouTube and Netflix \cite{rao2011network}
+are not closely related to the application scenario in this work. 
+
+
+\subsection{Sensing Vehicle Dynamics}
+
+The smartphone built-in sensors enable lots of vehicular applications
+that sense vehicle movements and capture driving behaviors 
+\cite{hansenspeed, wang2013sensing, chen2015invisible, uber, cmtelematics}. 
+\cite{hansenspeed} uses an accelerometer to estimate vehicular speed. 
+\cite{wang2013sensing} captures turns to determine driver phone
+use by comparing centrifugal force with a reference point. 
+\cite{chen2015invisible} develops a middleware that can detect 
+and differentiate various vehicle maneuvers, 
+including lane changes, turns, and driving on curvy roads,
+by using non-vision sensors.
+\cite{singh2013using, fazeen2012safe} use inertial sensors to detect the driving quality of the
+driver.
+Our work utilize these techniques to sense driving context 
+to improve video encoding efficiency.  
+
+ 
+\subsection{Self-Driving Systems}
+
+There are many corporations and researchers are developing fully self-driving
+techniques, such as Waymo, Mercedes-Benz and AutoX \cite{waymo, benz, autox}.
+Waymo uses LIDAR as the primary input for object detection \cite{waymo}. 
+AutoX proposes camera-first self-driving solution to reduce
+the cost to build a self-driving vehicle \cite{autox}.  
+\cite{cvpr17chen} presents a sensory-fusion perception framework 
+that combines LIDAR point cloud and RGB images as input and 
+predicts oriented 3D bounding boxes. 
+\cite{leonard2008perception} describes the architecture and implementation 
+of an autonomous vehicle designed to navigate using locally perceived 
+information in preference to potentially inaccurate or incomplete map data. 
+\cite{lee2016internet} presents networked self-driving vehicles to coordinate 
+and form an edge computing platform. 
+We believe our remote control framework can act the safe backup
+for such self-driving systems.
+Different from \cite{kang2018rc}, which presents high level possible 
+challenges and directions, 
+our work present the design and implementation of a working system.  
+
+
+\subsection{Reducing Network Latency}
+
+Reducing network latency is an active area of research. 
+\cite{singla2014internet} investigates the causes of latency inflation in the
+Internet and proposes a grand challenge for the networking research 
+community: a speed-of-light Internet. 
+\cite{zhang20145g, agiwal2016next} propose various architectures and techniques
+for high capacity and low latency 5th generation mobile networks. 
+\cite{huang2013depth} develops a passive measurement tool to 
+study the inefficiency in today's LTE networks. 
+\cite{ali2013quality} presents the features to improve
+quality of service in LTE networks. 
+\cite{stonebraker20058} discusses the requirements of system
+design for real-time streaming. 
+\cite{song2017wifi} presents a Wi-Fi based roadside hotspot network to
+operate at vehicular speeds with meter-sized picocells.
+\cite{lee2015outatime} uses speculation to predict future frames to reduce 
+latency for mobile cloud gaming.
+\cite{tu2016volte} presents the inefficiencies of current VoLTE architectures. 
+All these work can inspire the design of remote control systems for self-driving vehicles.
+\cite{singla2014internet} reveals that
+infrastructural inefficiencies and protocol
+overheads cause today's Internet latency. 
+
+
+

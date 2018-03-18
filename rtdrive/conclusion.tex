@@ -1,0 +1,28 @@
+
+This paper introduces RTDrive, a real-time live streaming and 
+remote control framework to augment self-driving
+systems upon occasional system failures. 
+RTDrive consists of an Android-powered self-driving
+and video streaming system and a server that can
+display the camera view streamed in real time 
+and send back control command to control the
+vehicle. 
+RTDrive includes some system modules 
+such as video encoding/decoding, FEC encoding/decoding,
+loss rate and bandwidth estimation, vehicle dynamics
+sensing, as well as transportation protocols. 
+Such a framework facilitate future research topcis such as
+video encoding and streaming, video bitrate adaptations
+in this application domain. 
+Based on this framework, 
+we design and implement several innovative mechanisms to improve
+video encoding efficiency and user viewing experience.
+We introduce a context-aware video encoding technique
+to encode video based on vehicle dynamics, 
+which improves video encoding efficiency by 10\%-30\%
+through real world driving trace replay,
+and consistent-latency to improve user viewing experience
+by reducing lags, which improves user control
+precision by 2x through user study. 
+ 
+

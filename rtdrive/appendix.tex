@@ -1,0 +1,37 @@
+
+\begin{enumerate}
+  \begin{algorithm}[H]
+   \caption{FEC Packets Buffering}
+    \label{fec_buffer}
+    \begin{algorithmic}[1]
+\Function{buffering}{$buffer, curid, pkt$}
+\Comment{Where buffer - Packet buffer for decoding, 
+curid - latest frame identifier, 
+pkt - Frame packet}
+  \State ${id} = pkt.id$
+  \State ${k} = pkt.k$
+  \If {$curid < id$}
+    \State \Return
+  \EndIf
+  \If {$curid == id$}
+    \State $buffer.insert(pkt)$
+    \If {$buffer.size() == k$}
+      \State $decodePackets(buffer)$
+      \State $buffer.clear()$
+      \State $curid = curid + 1$
+    \EndIf
+  \Else
+    \If {$buffer.size() > 0$}
+      \State $decodePackets(buffer)$
+    \EndIf
+    \State $buffer.clear()$
+    \State $buffer.insert(pkt)$    
+    \State $curid = id$
+  \EndIf
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+\end{enumerate}
+
+
+

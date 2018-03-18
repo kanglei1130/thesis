@@ -1,0 +1,98 @@
+
+In this section, we discuss some design considerations of EcoDrive. 
+
+
+\textbf{Hybrid Vehicle (HV) and Electric Vehicle (EV)}. 
+EcoDrive is designed for gasoline-powered vehicles, but the modeling process
+and gas pedal emulation can also be applied to HVs and EVs. 
+Currently, the majority of vehicles running
+on street are still gasoline-powered vehicles. 
+It is important to develop systems like EcoDrive
+to work on regular vehicles to improve fuel efficiency
+and limit carbon pollution. 
+The core of EcoDrive is that it can work on regular vehicles
+with easy and recoverable installation. 
+
+
+\textbf{Instant Fuel Economy Display}.
+In urban environments, acceleration is not fuel efficient, but accelerating to a higher speed
+in a careful way can improve fuel efficiency. 
+If the driver refuses to accelerate due to low instant fuel efficiency,
+the car will drive in low fuel efficient speed and eventually increase
+fuel consumption. 
+Similarly, releasing gas pedal can increase instant fuel efficiency dramatically, 
+but frequent acceleration and deceleration will consume more fuel
+than cruising under certain speed. 
+Therefore, instant fuel economy display is misleading
+and may reduce overall fuel efficiency. 
+
+
+
+\textbf{Impact of Traffic and User Experience}.
+EcoDrive controls the vehicle in a way that is similar to cruise control, 
+so the driver should keep a safe distance to
+front vehicle. 
+Since EcoDrive accelerates the vehicle in various ways according to
+different road segment lengths, 
+it is more challenging for human drivers to keep safe distance than cruise
+control in dense traffic scenarios, because
+drivers need to frequently brake to avoid front-end collision. 
+Therefore, EcoDrive is more suitable for drivers to use in low traffic volume scenarios. 
+However, it is shown from the data we collected that drivers tend to
+accelerate much more aggressive than the optimal acceleration patterns. 
+In other words, EcoDrive achieves higher fuel efficiency by accelerating
+slower than most drivers usually do. 
+Also, EcoDrive uses fixed acceleration pattern for fixed road length
+and speed limit, 
+drivers and passengers can easily get used to the driving style
+of EcoDrive. 
+Therefore, we expect EcoDrive can be useful in most urban driving scenarios 
+(except traffic hours) and drivers can still feel that the vehicles are under control
+due to predictable accelerations. 
+We also expect that EcoDrive can tolerate more complex traffic
+conditions when integrating with front object detection and
+route planning systems equipped on driverless cars. 
+
+
+\textbf{Limitations}. 
+First, EcoDrive requires the road length as input in short length road segment 
+(e.g., shorter than 200m). 
+Second, it relies on drivers to brake or switch to disable EcoDrive mode. 
+The operation complexity is acceptable for drivers as proven
+by cruise control.
+Third, EcoDrive requires mileage trainings to build an accurate model, i.e., 
+1000 miles driving data can build a very accurate model as shown in evaluation. 
+Some optimization can be made to reduce training time, e.g., sharing the AFR profile 
+among same vehicle models.
+Fourth, we did not evaluate EcoDrive by end-to-end scenarios in urban environment, 
+e.g., what are the fuel savings from home to work. 
+There are different traffic volumes 
+and different traffic light schedules among different trips. 
+Therefore, it is challenging to compare EcoDrive with human drivers 
+in such scenarios. 
+Given the fuel improvement in arbitrary length road segments, 
+we believe EcoDrive can improve fuel efficiency in end-to-end scenarios as well.   
+
+Each trip can be divided into three parts: acceleration, cruising and braking. 
+Acceleration and cruising consume most of the fuel during a trip. 
+For this work, EcoDrive focuses on the acceleration part and cruising part. 
+There is no direct way to fairly compare two brakes that made by different drivers, 
+or different brakes made by the same driver. 
+Therefore, we did not include the fuel consumption of braking in our evaluation. 
+
+There are other factors that affect fuel consumption, e.g., 
+tire pressure, temperature and wind direction etc. 
+A more accurate model can be built by using more 
+vehicle parameters. 
+However, there is no direct way to access some in-vehicle parameters
+like tire pressure. 
+We advocate that the vehicle manufacturers provide more
+information through OBD port that can be used to enable
+more applications. 
+Some other real world parameters, 
+e.g., traffic light schedule, stop sign and wind direction etc., 
+can also be used to improve fuel efficiency. 
+We believe such extra information can be used to improve 
+EcoDrive in broader aspects.
+
+

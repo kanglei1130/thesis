@@ -1,0 +1,58 @@
+
+
+
+
+In this section, we discuss the architecture of EcoDrive and 
+possible applications.
+
+
+\subsection{EcoDrive Architecture}
+
+EcoDrive reads real-time OBD parameters through OBD port
+and controls air/fuel injection rate by emulating the gas pedal.
+We illustrate the architecture of EcoDrive in Fig. \ref{ecodrive}.
+The sensed parameters from OBD port are passed to modeling component
+to train the models.
+The modeling component builds an AFR profile to 
+record the instant fuel consumptions of various 
+accelerations at different speeds.
+Based on pre-calculated driving strategy and real-time sensed vehicular speed, 
+the controlling component controls air/fuel injection rate to adjust vehicular speed by 
+sending the gas pedal position values to the ECU. 
+To emulate the gas pedal, we utilize the drive-by-wire technology, 
+where the gas pedal and throttle are connected by electronic messaging instead of mechanical linkage.   
+It enables the position of gas pedal can be sent as a message
+to control throttle position. 
+The throttle controls the volume of air flow injected into the engine. 
+ 
+
+
+\subsection{Applications}
+
+EcoDrive is used as an independent system that can be installed
+on regular vehicles.  
+It can be used as a control system in a way similar to 
+cruise control \cite{cruise_control, bengtsson2001adaptive, ioannou1993autonomous}. 
+In this application, it is used as a EcoDrive mode that a human driver
+can switch it on or off. 
+Drivers are required to press the brake pedal to turn this mode off
+to keep safe distance to front car or traffic lights/signs accordingly.
+This mode can be integrated with intelligent front object or traffic light detection
+systems \cite{bengtsson2001adaptive, ioannou1993autonomous} 
+to further enhance driving experience. 
+EcoDrive requires two inputs, the speed limit and road length. 
+The speed limit can be specified by human driver or obtained from online database \cite{speedlimit}. 
+The road length can be calculated by a navigation software.
+
+
+
+It can also be used as a subsystem of autonomous driving systems 
+\cite{googledriverlesscar, urmson2008autonomous, litman2013autonomous, kim2013towards}. 
+We envision a highly autonomous and intelligent system that all the route
+information are pre-calculated, e.g., speed limit, traffic conditions and
+distances of each road segment etc. 
+EcoDrive can be used as a subsystem to predict fuel consumption
+of possible routes \cite{ganti2010greengps} and 
+calculate the optimal driving strategy.  
+
+

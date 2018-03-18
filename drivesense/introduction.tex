@@ -1,0 +1,119 @@
+
+
+Smartphone-based sensing has opened up a whole gamut of applications and services
+for road safety, such as driving behavior and driver distraction monitoring. 
+One such application is the ability to independently monitor driving behavior --- how well is one
+driving the vehicle, e.g., aggressive driving actions, such as rough acceleration, hard brakes, and lane changes, and more.
+The popularity of smartphones and built-in Inertial Measurement Unit (IMU) sensors enable
+a low-cost way of monitoring such behaviors and actions.
+For example, Cambridge Mobile Telematics \cite{cmt} 
+develops a smartphone
+app to capture driving behaviors and monitor driver
+distractions.
+The well-known ride-sharing company Uber announced
+it will start tracking Uber drivers' driving behaviors
+with their smartphones and give them feedbacks that are more detailed than 
+the five-star rating customers leave for each driver \cite{uber}.
+
+The general approach to monitoring such vehicle motion (and drive) parameters is to use an accelerometer in a mobile device
+ to measure the three-dimensional acceleration
+and using a gyroscope to measure the three-dimensional relative rotation speed.
+The accelerometer can be used to sense vehicular speed \cite{hansenspeed}
+by eliminating estimation errors at reference points where 
+ground truth vehicular speed is known.
+The gyroscope can be used to detect turns to determine
+driver phone use by comparing centripetal accelerations with 
+a reference point \cite{wang2013sensing}, 
+and it can also be used to track drivers' 
+other steering activities \cite{chen2015invisible}.
+Calculating the exact orientation of the phone is an important step in enabling estimation of such motion parameters.
+Prior work has dealt with different variants of this problem ---  the absolute coordinates estimation problem (orientation relative
+to flat earth surface)  \cite{zhou2014use}
+and the relative coordinates estimation problem (orientation relative to the orientation of the vehicle which depends on 
+the grade and slope of the road) \cite{wang2013sensing, chen2015invisible}.
+Both are challenging tasks due to the low accuracy 
+and accumulated errors of IMU sensors \cite{zhou2014use}.
+Most in-vehicle applications use the relative coordinates estimation 
+and depend on coordinate alignment,
+which essentially aligns the coordinates of the smartphone to the car \cite{wang2013sensing, chen2015invisible, hansenspeed}. 
+In our evaluation, we found that such prior work is not able to accurately estimate
+road slope gradients which leads to increased errors in estimating vehicle motion
+parameters. Further, the coordinate alignment process usually needs time to
+converge and a fast convergence time is desirable in many real-time settings.
+
+\iffalse
+But none of those work addressed the problems caused by road slope
+and the method to estimate slope gradients before and after coordinate
+alignments.
+Also, it is still an open question that how fast 
+alignment algorithm can converge, e.g., if an algorithm requires the whole
+trip to train the algorithm, then it can not be used in real-time applications for short trips.
+\fi
+
+
+In this section, we study the impact of road slopes on estimating various vehicle motion
+parameters, especially the acceleration related ones. This is the central problem for
+vehicle motion sensing using such mobile devices because many roads are never perfectly
+level and even gentle slope of roads can lead to significant inaccuracies.
+Investigating this further, we find that there
+are three related issues.
+First, we use a real-world driving trace to show that
+even a perfectly aligned smartphone may overestimate or
+underestimate brakes and accelerations due to the gravitational
+effect.
+When a car is parked on a slope, the linear acceleration
+of the heading direction should be zero, 
+but the accelerometer will 
+sense the gravity component  in the same direction and conclude
+the car is accelerating or decelerating on upslope or downslope. 
+Therefore, the heading direction component of the accelerometer may be overestimated or underestimated.
+Second, we also show that the gravitational effect can prolong the training time
+of coordinate alignment and lower alignment accuracy. 
+So, it is necessary to estimate the slope gradients even before
+coordinate alignment is fully conducted.
+Third, estimating slope gradients by gyroscope is challenging due
+to the low accuracy of the IMU sensors \cite{zhou2014use}.
+
+
+To overcome these challenges, we designed a software module that 
+can reduce coordinate alignment training time by utilizing selective
+training and combining multiple training segments with different weights. 
+We also improve coordinate alignment accuracy by 
+improving slope gradient estimation at coordinate alignment time.
+We believe reducing training time can enable real-time applications like 
+aggressive driving behavior warning.
+To estimate slope gradients after alignment, 
+we use sensor fusion and opportunistic calibration.
+Provided that no alignment is perfect, 
+we eliminate errors of gyroscope and accelerometer caused by
+misalignment.
+We only use calibration segment,
+which refers to the road segments that accelerometer can produce accurate gradient estimation,
+to calibrate gyroscope. 
+Compared to the state of the art, our coordinate alignment module can converge much 
+faster and our linear acceleration estimation module can achieve better accuracy. 
+
+
+\nop{
+\textbf{Contributions}. We design a smartphone-based system to improve the accuracy of estimating
+vehicle motion parameters. 
+We illustrate that road gradients, even gentle ones,
+can cause acceleration overestimation or underestimation 
+due to the gravitational effect.
+They also have a great impact on coordinate alignment. 
+We implement a software module that can reduce coordinate alignment
+training time to enable real-time estimation of these parameters.
+It can also estimate slope gradient before and after coordinate alignment
+by combining the estimation results from accelerometer and gyroscope. 
+By removing the gravity components, it is able to capture vehicle motion parameters
+with greater accuracy than the state of the art,  
+comparing with ground truth speed readings from the 
+in-vehicle on-board diagnostics (OBD) port \cite{obd}.
+The coordinate alignment is faster than the existing state of the art alternatives.
+We evaluate our solution by using traces across highways and urban city roads of about 10,000 miles.
+}
+
+
+
+
+

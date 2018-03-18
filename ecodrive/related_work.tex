@@ -1,0 +1,105 @@
+
+
+\subsection{Cruise Control}
+
+%\textbf{Cruise Control}. 
+Cruise control \cite{cruise_control} is a system that automatically
+controls the vehicle to drive in a certain speed. 
+\cite{bengtsson2001adaptive} introduces Adaptive Cruise Control (ACC)
+that adjusts vehicle speed based on distance to cars ahead
+by using radar. 
+\cite{lin2009effects} studies the effects of time-gap
+settings of adaptive cruise control on driving performance
+in a bus driving simulator. 
+\cite{loos2011adaptive} studies a distributed car control system
+that every car is controlled by adaptive cruise control. 
+\cite{ioannou1993autonomous} develops an intelligent cruise control system 
+for automatic vehicles and verify the effectiveness of the system
+under emergency situations by simulation.  
+EcoDrive is more fuel efficient than adaptive cruise control 
+in two ways. 
+First, EcoDrive is able to improve fuel efficiency by 
+adjusting speed according to road conditions and vehicle types. 
+Second, EcoDrive tracks the fuel efficiency under different cruising
+speeds and provides a tradeoff between fuel efficiency and travel time. 
+
+\subsection{Fuel Efficiency Enhancement}
+
+%\textbf{Fuel Efficiency Enhancement}. 
+Increasing vehicular fuel efficiency has been a topic 
+of much recent research \cite{ganti2010greengps, koukoumidis2011signalguru, 
+boriboonsomsin2010eco, tulusan2012providing}.
+GreenGPS \cite{ganti2010greengps} requires a fuel map server
+to record the statistical route fuel usage and calculate the most
+fuel efficient route for drivers. 
+SignalGuru \cite{koukoumidis2011signalguru} requires vehicles sharing
+traffic light information so that drivers can adjust the speed of
+the vehicle to avoid stops in front of traffic lights. 
+\cite{boriboonsomsin2010eco} uses an on-board eco-driving device 
+that provides instantaneous fuel economy
+feedback affects driving behaviors, and consequently fuel economy. 
+\cite{tulusan2012providing} evaluates the impacts of a smartphone application
+on driving behaviors to enhance fuel efficiency. 
+Different from existing approaches that are focusing on advising human drivers to adjust driving behaviors, 
+EcoDrive is designed to assist human drivers.
+Both \cite{lang2013opportunities} and \cite{lang2014prediction} show that some reduction of fuel consumption can be achieved
+by vehicle-to-vehicle communication. 
+
+
+
+\subsection{Vehicle Dynamics Sensing}
+
+%\textbf{Vehicle Dynamics Sensing}. 
+Smartphones equipped with various sensors are widely used
+to sense vehicle dynamics to understand driving behaviors and road conditions.
+\cite{johnson2011driving} detects aggressive driving behaviors 
+based on accelerometer sensor readings from smartphone. 
+\cite{wang2013sensing} determines driver phone use by comparing
+the centrifugal force of smartphone with that of a fixed reference sensor
+during turns. 
+\cite{eriksson2008pothole} monitors road surface conditions by using accelerometers. 
+\cite{Mohan2008Nericell} detects various road and traffic conditions, 
+e.g., potholes, bumps, braking, and honking, 
+by using various sensors in smartphones. 
+\cite{progressive} senses speeds from the OBD port to identify aggressive
+driving behaviors and offer discounts for drivers with good driving habits.  
+However, none of these work models vehicle dynamics as functions of instant fuel consumption. 
+
+\subsection{Vehicle Force Modeling}
+
+%\textbf{Vehicle Dynamics Modeling}. 
+\cite{andersson2012online} models rolling resistance and air drag based on some measurements 
+on the vehicle, e.g., effective areas to model air drag. 
+\cite{zanasi2001dynamic} models vehicle transmission system based on gear sizes. 
+\cite{canudas1999dynamic} models tire friction based on tire parameters, e.g., radius. 
+\cite{brusamarello2010dynamic} presents an electronic system attached on wheel to measure and
+monitor of the torque transmitted to the wheel of a moving vehicle.
+\cite{vong2006prediction} models engine torque and horsepower by RPM when the
+engine is not connected with transmission. 
+Our model uses the parameters available on car CAN bus to find the relations between fuel consumption and vehicle speed changes.
+Different from existing work, 
+our model does not rely on the detail physics properties of the car, 
+e.g., tire radius and transmission gear size etc.
+
+
+\subsection{Autonomous Driving}
+
+%\textbf{Autonomous Driving}. 
+There have been major advances in designing and
+building autonomous vehicle operating systems to 
+realize safer and more convenient vehicles 
+\cite{googledriverlesscar, urmson2008autonomous, litman2013autonomous, kim2013towards}. 
+These work focuses on issues related to object detection and efficient navigation and so forth. 
+CarSpeak \cite{kumar2012carspeak} is designed as a communication system to share sensory
+data between autonomous vehicles for obstacle detection.
+Different from autonomous cars studies, 
+we focus on the design and implementation of 
+fuel-aware acceleration control system that works on existing regular vehicles. 
+We expect that EcoDrive can be integrated with autonomous driving cars, 
+but EcoDrive can also be used independently. 
+Also, EcoDrive can work on existing vehilces with little hardware changes. 
+
+
+
+ 
+

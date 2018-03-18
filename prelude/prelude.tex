@@ -1,0 +1,159 @@
+% prelude.tex
+%   - titlepage
+%   - dedication
+%   - acknowledgments
+%   - table of contents, list of tables and list of figures
+%   - nomenclature
+%   - abstract
+%============================================================================
+
+
+\clearpage\pagenumbering{roman}  % This makes the page numbers Roman (i, ii, etc)
+
+
+
+% TITLE PAGE
+%   - define \title{} \author{} \date{}
+\title{Improving Datacenter Network Performance via the Intelligent Network Edge}
+\author{Lei Kang}
+\date{}
+%   - The default degree is ``Doctor of Philosophy''
+%     (unless the document style msthesis is specified
+%      and then the default degree is ``Master of Science'')
+%     Degree can be changed using the command \degree{}
+\degree{Doctor of Philosophy}
+%   - The default is dissertation, unless the document style
+%     msthesis was specified in which case it becomes thesis.
+%     If msthesis is specified for the MS margins, you can
+%     still have a dissertation if you specify \disseration
+%\disseration
+%   - for a masters project report, specify \project
+%\project
+%   - for a preliminary report, specify \prelim
+%\prelim
+%   - for a masters thesis, specify \thesis
+\thesis
+%   - The default department is ``Electrical Engineering''
+%     The department can be changed using the command \department{}
+\department{Computer Sciences}
+%   - once the above are defined, use \maketitle to generate the titlepage
+\oralexamdate{5/1/2018}
+\committeeone{Suman Banerjee, Professor, Computer Science}
+\committeetwo{Srinivasa A. Akella, Professor, Computer Science}
+\committeethree{Eric J. Rozner, Research Staff Member, IBM Research}
+\committeefour{Michael M. Swift, Associate Professor, Computer Science}
+\committeefive{Xinyu Zhang, Assistant Professor, Electrical and Computer Engineering}
+\date{2018}
+
+
+\maketitle
+
+% COPYRIGHT PAGE
+%   - To include a copyright page use \copyrightpage
+\copyrightpage
+
+% DEDICATION
+\begin{dedication}
+\emph{To my loved ones}
+\end{dedication}
+
+% ACKNOWLEDGMENTS
+\begin{acknowledgments}
+
+It has been a long but rewarding journal at UW-Madison.
+
+First of all, I would like to thank my Ph.D. advisor, Prof. Suman Banerjee. 
+He has done an amazing job in guiding my graduate studies, transforming me
+from a college graduate without knowing what to do, to a confident Ph.D. with
+solid skills at hands. 
+He changed me from a paper driven researcher to a problem solving researcher. 
+I deeply appreciate the time, patience, care, 
+and support Prof. Banerjee has devoted to guiding my professional
+development, along with the help on many personal matters. 
+ 
+I would like to thank the members of my thesis committee, TBD. 
+Their valuable suggestions and comments greatly improved this thesis.
+ 
+I would like to thank my MPhil advisor, Prof. Lionel Ni. 
+He is a decent and kind man. 
+He always take care of his students, in every way that is possible, 
+while he is very busy with academic and administrative affairs. 
+
+
+I would like to thank my internship mentors, Bozidar
+
+ 
+I would like to thank my research collaborators, 
+Peng Liu,
+Bozhao Qi,
+Wei Zhao,
+Dan Janecek,
+. 
+Working with these brilliant people is a great gift to me. 
+I am also quite fortunate to have great friends that I can hang out with and have
+beer together: 
+Keqiang He,
+Suli Yang,
+
+
+Last but definitely the most important one, my wife.  
+
+
+\end{acknowledgments}
+
+% CONTENTS, TABLES, FIGURES
+\tableofcontents
+%%\listoftables
+%%\listoffigures
+
+
+
+\advisorname{Suman Banerjee}
+\advisortitle{Professor}
+
+
+
+\begin{abstract}
+
+
+
+Vehicles bring us travel convenience as well as many problems 
+such as environment pollution, road congestion and fatalities. 
+We propose building smart in-vehicle systems and smartphone enabled
+vehicular applications to provide various types of 
+assistance to remedy these issues. 
+Such systems sense and model vehicle dynamics from vehicle parameters and
+third party sensors, based on which they provide guidance
+and control to assist human drivers and achieve better driving performance. 
+EcoDrive is one such system we built that conduct fuel consumption sensing and control 
+to improve fuel efficiency and reduce carbon emissions. 
+EcoDrive models instant fuel consumption based on vehicle 
+parameters collected from On-board diagnostics (OBD) port. 
+According to the model, it controls the gas pedal position sensor
+to adjust fuel injection rate according to road segment distance 
+and speed limit. 
+By using careful control of fuel injection rate, it is able
+to improve fuel efficiency comparing to human drivers. 
+We also implemented a smartphone vehicular application, called DriveSense, 
+that senses vehicle dynamics by built-in sensors and provide feedback to drivers 
+on aggressive events to improve their driving safety awareness.
+Sensing vehicle dynamics by smartphone sensors require coordinate alignment
+between the smartphone and the car. 
+We found that even gentle road slopes may cause 
+severe coordinate misalignment and acceleration over/under estimation. 
+To resolve these problems, we propose slope-aware
+coordinate alignment algorithm and linear acceleration
+estimation method to reduce alignment training time and improve
+linear acceleration estimation accuracy.  
+Based on our past experiences on in-vehicle systems and driving behavior study, 
+we propose two future work to further improve driving safety 
+and efficiency by utilizing smartphone sensors. 
+First, we propose to evaluate the performance of smartphone GPS and 
+IMU sensors for capturing driving behaviors, 
+and examine the benefits when combining GPS and IMU sensors.
+Second, we propose to combine smartphone cameras, GPS and IMU sensors to detect driver phone use. 
+
+\end{abstract}
+
+
+\clearpage\pagenumbering{arabic} % This makes the page numbers Arabic (1, 2, etc)

@@ -1,0 +1,169 @@
+
+A self-driving vehicle is one that is capable of sensing 
+its environment and navigating itself without human input \cite{wikiselfdrivingcar}. 
+It uses a variety of techniques to sense its surroundings,
+such as LIDAR, RADAR, odometry, and computer vision. 
+It uses these different sensor inputs 
+to understand its environment, 
+recognize various road conditions, traffic lights, road signs,
+lane boundaries, and track surrounding vehicles.
+The potential benefits of self-driving vehicles
+include increased safety, increased mobility and lower
+costs. 
+It is estimated that self-driving vehicles can reduce 90\%
+of the accidents and prevent up to \$190 
+billion in damages and health-costs annually
+\cite{litman2014autonomous}.
+
+
+Many commercial and academic endeavors are putting significant resources
+for the development and tests
+of such self-driving systems \cite{waymo, benz, autox}.
+For example, Google started its self-driving project in 2009,  
+and has spent more than \$1 billion
+in building and testing fully self-driving vehicles~\cite{googlespend}. 
+While legal and political challenges remain in its widespread adoption,
+there are also some technical bottlenecks on the way of developing
+completely reliable self-driving systems.
+
+
+All self-driving systems make
+decisions based on the perception of the environment and
+predefined traffic rules. However, there has been occasional
+failures of these systems when they have encountered scenarios
+that were hitherto unseen. For instance, based on the situation
+ in a construction
+zone, human drivers would realize that it is permissible to cross
+over a double yellow line by following the appropriately placed
+cones  (which otherwise is illegal to cross
+in the US), while a self-driving vehicle may not be able to
+do so, and therefore be unable to move forward. Similarly in
+poor weather conditions or due to traffic light malfunctions,  
+the cues from different sensors may
+contradict each other leading to confusion in decision making.
+
+In general, the road rules are complex and may conflict with
+each other, i.e., the system has to understand when
+to follow cones and ignore lane markers, 
+and when to obey a road worker and disobey traffic
+signs.
+%To address the last mile challenge, some recent work \cite{kang2018rc} 
+%propose to use specially designated remote human operators
+%to augment self-driving system when it fails to 
+%perceive or handle current situations. 
+While it is tempting to return control (during the failure of the self-driving
+function) to a local human driver situated in the vehicle, 
+it is foreseeable a future of driverless cabs carrying only
+underage or licenseless passengers.
+Hence, we expect that remote drivers can multiplex and manage
+a large group of vehicles making scalability feasible.
+However, accomplishing remote driving for a vehicle requires careful tuning 
+of (wireless-based) network parameters, media content and their formats,
+and control experience with some real-time constraints between the vehicle 
+and the remote driving station.
+
+%It is well established that human
+%drivers, especially experts, are capable of making good judgement calls
+%in face of contradictory or inadequate inputs, that sometimes limit 
+%a learning system that has yet to encounter a scenario before.
+%While it is tempting to return control (during the failure of the self-driving
+%function) to a local human driver situated in the vehicle, 
+%it is foreseeable a future of driverless cabs carrying only
+%underage or licenseless passengers.
+%Hence, we expect that remote drivers can multiplex and manage
+%a large group of vehicles making scalability feasible.
+
+
+
+In this paper, we present RTDrive, a remote driving framework
+that augments self-driving system when it fails to 
+percept and/or handle current situations. 
+RTDrive consists of a live streaming system
+and a remote control server. 
+The live streaming system can encode videos by using
+a context-aware video encoding algorithm. 
+It also includes a live streaming protocol that 
+carries out a consistent-latency
+view mechanism to make the view of the operator
+more smooth. 
+The framework also consists of several modules, video codec, 
+Forward Error Correction (FEC), vehicle dynamics sensing,
+lane boundary detection, object detection etc.,
+that enable further extension, optimization and innovation.  
+
+
+
+\textbf{Context-Aware Video Encoding}.
+The context-aware video encoding algorithm can 
+sense vehicle dynamics and based on which it 
+selects the optimal video encoding bitrate and key frame intervals. 
+In video live streaming, the video is encoded into two
+frames, I-frame and P-frame.
+I-frame is also called key frame and it can be 
+decoded into a complete image. 
+P-frame only encodes the difference between current
+frame to previous I-frames and P-frames. 
+The context-aware video encoding algorithm
+can dynamically adjust the number of I-frames
+and P-frames to improve video encoding efficiency. 
+The intuition is to adjust the key frame interval 
+based on the frequency of camera view changes. 
+For example, in the cases of turning or high speed scenarios,
+there should be more I-frames since P-frames cannot
+carry enough information which may lead to severe quality degradation. 
+Through real world trip data collection and replay,
+the context-aware video encoding algorithm can outperform
+the default encoding algorithm by 10\%-30\% in various trips. 
+
+\textbf{Live Streaming Protocol}.
+We design and implement a live streaming protocol. 
+It consists of several modules such as UDP/TCP, FEC, 
+bandwidth and packet loss rate estimation. 
+We discuss the design choices and evaluate these modules
+under various network parameter settings. 
+Also, a consistent-latency view algorithm 
+is designed to deliver smooth
+videos to improve the remote control experience. 
+It uses a buffer to order the frames based on the timestamps
+and deliver to the frame display engine only when it is 
+the its order.
+It achieves this goal by tracking two parameters, 
+the latency difference and the latency deviation.   
+The latency difference between
+the live streaming system and the server is
+tracked by using a low pass filter. 
+The deviation of the latency difference is also recorded. 
+Through a user study with 20 participates on controlling the Android-powered
+vehicle, the operators with consistent-latency have
+2x better control precision. 
+
+
+This paper makes the following contributions:
+\begin{itemize}
+\setlength\itemsep{0em}
+
+\item We design and implement RTDrive, a live streaming and remote control
+framework, that can be used to view video stream and
+control the vehicle remotely in real time. 
+RTDrive can augment self-driving systems when they are
+failed to percept the environment under various unpredictable conditions. 
+
+\item We present a context-aware video encoding algorithm,
+which can encode video frames according to vehicle dynamics. 
+According to the traces we collected, it is able to improve
+the video encoding efficiency by 10\% to 30\% on average in 
+various driving scenarios. 
+
+\item We propose a consistent-latency live streaming protocol,
+which can adapt to wireless network conditions and buffer frames
+for smooth display. 
+It includes various modules such as bandwidth estimation, loss rate 
+estimation, FEC encoding and frame buffering. 
+According to a user study with 20 participates, 
+the consistent-latency view algorithm improve the control
+precision by more than 2x on average in a parking
+task. 
+\end{itemize}
+
+
+
