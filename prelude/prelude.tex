@@ -37,12 +37,12 @@
 %     The department can be changed using the command \department{}
 \department{Computer Sciences}
 %   - once the above are defined, use \maketitle to generate the titlepage
-\oralexamdate{5/1/2018}
+\oralexamdate{5/x/2018}
 \committeeone{Suman Banerjee, Professor, Computer Science}
-\committeetwo{Srinivasa A. Akella, Professor, Computer Science}
-\committeethree{Eric J. Rozner, Research Staff Member, IBM Research}
-\committeefour{Michael M. Swift, Associate Professor, Computer Science}
-\committeefive{Xinyu Zhang, Assistant Professor, Electrical and Computer Engineering}
+\committeetwo{Mohit Gupta, Assistant Professor, Computer Science}
+\committeethree{Soyoung Ahn, Associate Professor, Civil and Environmental Engineering}
+\committeefour{TBD, Professor, Computer Science}
+\committeefive{TBD, Professor, Electrical and Computer Engineering}
 \date{2018}
 
 
@@ -80,23 +80,51 @@ He always take care of his students, in every way that is possible,
 while he is very busy with academic and administrative affairs. 
 
 
-I would like to thank my internship mentors, Bozidar
-
- 
-I would like to thank my research collaborators, 
+I would like to thank my internship hosts, Bozidar Radunovic, 
+Shizhen Zhao, Yadi Ma and Junlan Zhou. 
+I would like to thank my other research collaborators, 
 Peng Liu,
 Bozhao Qi,
 Wei Zhao,
 Dan Janecek,
-. 
+Yijing Zeng,
+Haoran Qiu,
+Allen Liu
 Working with these brilliant people is a great gift to me. 
+
 I am also quite fortunate to have great friends that I can hang out with and have
 beer together: 
 Keqiang He,
 Suli Yang,
+Jianqiao Zhu,
+Yuqi He,
+Shiwei Zhou,
+Na Li,
+Ze Wang,
+Xuan Wang,
+Yuzhang Zang,
+Xue Yin,
+Mengguo Jing,
+Zhen Di,
+Zhe Yang,
+Chenxiao Guan,
+Xun Zhao,
+Ziqi Yang,
+Ming Gao,
+Yan Zhai,
+Liang Wang,
+Xiujun Li,
 
 
-Last but definitely the most important one, my wife.  
+Last but definitely the most important one, my wife.
+I still remember when we first met 5 years ago in a classroom. 
+The first sentence my wife (Xuan) said to me is to ask my phone number, 
+which is truly surprising, as there were no girls initiatively asked my phone number before. 
+An even more surprising thing, which I found years later, is she asks the 
+phone numbers of almost every Chinese students have the same class with her 
+so that she can discuss homework with them.
+She makes me a better person and I can hardly imagine
+a life without her. 
 
 
 \end{acknowledgments}
@@ -117,25 +145,18 @@ Last but definitely the most important one, my wife.
 
 
 
-Vehicles bring us travel convenience as well as many problems 
-such as environment pollution, road congestion and fatalities. 
-We propose building smart in-vehicle systems and smartphone enabled
-vehicular applications to provide various types of 
-assistance to remedy these issues. 
-Such systems sense and model vehicle dynamics from vehicle parameters and
-third party sensors, based on which they provide guidance
-and control to assist human drivers and achieve better driving performance. 
-EcoDrive is one such system we built that conduct fuel consumption sensing and control 
-to improve fuel efficiency and reduce carbon emissions. 
-EcoDrive models instant fuel consumption based on vehicle 
-parameters collected from On-board diagnostics (OBD) port. 
-According to the model, it controls the gas pedal position sensor
-to adjust fuel injection rate according to road segment distance 
-and speed limit. 
-By using careful control of fuel injection rate, it is able
-to improve fuel efficiency comparing to human drivers. 
-We also implemented a smartphone vehicular application, called DriveSense, 
-that senses vehicle dynamics by built-in sensors and provide feedback to drivers 
+Vehicles bring us travel convenience as well as many environment and safety issues. 
+In recent decades, many in-vehicle systems are designed to improve driving performance 
+and experience by utilizing the computing power of modern vehicles,
+such as cruise control, driver distraction monitoring,
+and self-driving systems.   
+In this thesis, we present three systems fall in this domain, 
+called DriveSense, EcoDrive and RTDrive, 
+that are able to monitor, assist or even
+replace human drivers to achieve better driving performance and experience. 
+
+DriveSense is a smartphone vehicular application that 
+senses vehicle dynamics by built-in sensors and provide feedback to drivers 
 on aggressive events to improve their driving safety awareness.
 Sensing vehicle dynamics by smartphone sensors require coordinate alignment
 between the smartphone and the car. 
@@ -145,13 +166,34 @@ To resolve these problems, we propose slope-aware
 coordinate alignment algorithm and linear acceleration
 estimation method to reduce alignment training time and improve
 linear acceleration estimation accuracy.  
-Based on our past experiences on in-vehicle systems and driving behavior study, 
-we propose two future work to further improve driving safety 
-and efficiency by utilizing smartphone sensors. 
-First, we propose to evaluate the performance of smartphone GPS and 
-IMU sensors for capturing driving behaviors, 
-and examine the benefits when combining GPS and IMU sensors.
-Second, we propose to combine smartphone cameras, GPS and IMU sensors to detect driver phone use. 
+
+
+EcoDrive is an in-vehicle system that conducts fuel consumption sensing and control 
+to improve fuel efficiency and reduce carbon emissions. 
+EcoDrive models instant fuel consumption based on vehicle 
+parameters collected from On-board diagnostics (OBD) port. 
+According to the model, it controls the gas pedal position sensor
+to adjust fuel injection rate according to road segment distance 
+and speed limit. 
+By using careful control of fuel injection rate, it is able
+to improve fuel efficiency comparing to human drivers. 
+
+
+RTDrive is a live streaming and remote control system to 
+handle self-driving system failures. 
+A human operator can control the vehicle remotely, 
+only when self-driving system failures occur, 
+which may be due to bad weather, malfunction,
+contradiction in sensory inputs, and other such conditions.
+RTDrive consists of a context-aware video encoding method
+and a live streaming protocol.
+The context-aware video encoding method can improve video
+streaming quality by adjusting encoding parameters according to vehicle dynamics.   
+We also implement a consistent-latency view mechanism to
+smooth the video frames, 
+under which the remote driver can have more precise control
+over the vehicle. 
+
 
 \end{abstract}
 
