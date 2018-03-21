@@ -103,7 +103,7 @@ and introduce false positives/negatives on brake/acceleration monitoring.
 \subsubsection{Acceleration Estimation}
 
 
-We use dataset $\#1$ to evaluate the accuracy of XSense and
+We use dataset $\#1$ to evaluate the accuracy of DriveSense and
 other methods. 
 The other three methods are using Accelerometer with Traditional Coordinate
 Alignment (TCA)  \cite{hansenspeed, wang2013sensing, chen2015invisible}, 
@@ -124,7 +124,7 @@ The gap between Slope-Aware and Accelerometer are caused
 by road slopes, 
 where slope-unaware solution will over/under-estimate 
 acceleration due to gravitational force. 
-The accuracy gain of XSense is from the 
+The accuracy gain of DriveSense is from the 
 acceleration estimation compensation by sensors
 when the GPS speed is low. 
 
@@ -167,7 +167,7 @@ As expected and can be seen in Fig. \ref{xsense_steering},
 GPS can not estimate angular velocity accurate enough
 for small horizontal movement such as lane change due to
 its large estimation errors. 
-XSense performs slightly better than gyroscope with 
+DriveSense performs slightly better than gyroscope with 
 Traditional Coordinate Alignment (TCA) due to 
 the slope-aware solution presented in this work. 
 The gain is obtained in the cases where the coordinate

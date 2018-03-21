@@ -44,7 +44,7 @@ With many open questions in mind, we ask a high-level question in this proposal:
 
 \emph{how can we build sensing and control system blocks for modern vehicles to
 monitor, assist or even replace human drivers in
-improving driving performance and experience.}
+improving driving performance and experience?}
 
 
 To answer this question, we explore the sensing and control capabilities
@@ -79,6 +79,79 @@ called RTDrive to augment self-driving systems.
 \input{rtdrive/introduction}
 
 \section{Contributions}
+
+
+This thesis work makes the following contributions:
+\begin{itemize}
+\setlength\itemsep{0em}
+
+
+\item We illustrate that the accuracy of smartphone built-in sensors are very sensitive
+to road conditions and human interactions when conducting driving analytics. 
+Traditional slope-unaware approach may caused misalignment and acceleration over/under
+estimation, which may cause significant sensing errors. 
+We develop several techniques to identify the usability and accuracy of inertial sensors 
+and improve their performance.  
+We consider using commodity mobile device GPS receivers to sense vehicle
+motion parameters, especially those related to acceleration and brakes, 
+and evaluate the performance by more than 
+10,000 miles of driving data. 
+We find that GPS can be a good candidate to estimate such vehicle
+motions, especially in high speed scenarios (higher than $10m/s$ or $22mph$). 
+It indicates that GPS can be a good alternative than inertial
+sensors due to its simplicity and better performance in high speed
+scenarios.  
+We develop DriveSense, an Android application component that can 
+selectively use GPS and inertial sensors for driving analytics. 
+A beta version of DriveSense has been released to 9 volunteers and this version has
+currently recorded more than 3,000 miles of driving data in the last six months.
+Our evaluation shows that DriveSense can improve the overall performance 
+comparing with using either GPS or well-tuned inertial sensors. 
+
+
+
+\item We design and implement EcoDrive, 
+which is an independent fuel consumption sensing and control system
+that can improve fuel efficiency. 
+The system is implemented on an embedded platform 
+that can be easily installed on regular vehicles. 
+We model various vehicle forces as functions of instant fuel consumption
+and the models are evaluated by utilizing 
+10,000 miles of driving traces collected from 12 vehicles. 
+EcoDrive is installed on a regular vehicle and evaluated by more than 100 miles of driving in both urban and highway environments, 
+and demonstrated to improve fuel efficiency compared to cruise control system
+of the vehicle and to human drivers.  
+
+
+
+
+\item We design and implement RTDrive, a live streaming and remote control
+framework, that can be used to view video stream and
+control the vehicle remotely in real time. 
+RTDrive can augment self-driving systems when they are
+failed to percept the environment under various unpredictable conditions. 
+It includes a context-aware video encoding algorithm,
+which can encode video frames according to vehicle dynamics. 
+According to the traces we collected, it is able to improve
+the video encoding efficiency by 10\% to 30\% on average in 
+various driving scenarios. 
+It also includes a consistent-latency live streaming protocol,
+which can adapt to wireless network conditions and buffer frames
+for smooth display. 
+It includes various modules such as bandwidth estimation, loss rate 
+estimation, FEC encoding and frame buffering. 
+According to a user study with 20 participates, 
+the consistent-latency view algorithm improve the control
+precision by more than 2x on average in a parking
+task. 
+
+
+
+
+\end{itemize}
+
+
+
 
 
 
