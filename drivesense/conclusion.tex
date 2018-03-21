@@ -1,0 +1,37 @@
+
+
+
+Smartphones are commonly used for driving analytics applications. 
+Traditional approaches assume experimental
+cases where the smartphone is stably mounted with fixed relative orientation
+and the vehicle is travelling on flat roads. 
+By using an example experiment, we show that 
+even perfectly aligned accelerometer suffers acceleration overestimation or underestimation, 
+which is caused by gravitational force, misalignment and slope estimation error.  
+Moreover, the accuracy of IMU sensors are sensitive to human interactions
+as well. 
+For example, frequent relative orientation change and less stable mounting
+may cause significant estimation errors. 
+In this paper, the defects are remedied
+with following innovative techniques. 
+First, a slope-aware alignment algorithms to reduce the slope influence, 
+meanwhile, to improve alignment accuracy. Also, we track the linear 
+acceleration of the vehicle to address acceleration over/under estimation problems. 
+Second, in order to timely update 
+vehicular motion parameters, the relative orientation changes of 
+smartphone are detected using machine learning algorithms. 
+Third, we model mounting stability of the smartphone and 
+evaluate the sensing accuracy under different stability estimations.  
+Fourth, we present the tradeoffs between inertial sensors, the primary sensors, 
+and GPS, which is used when inertial sensors lose accuracy or disable. 
+To evaluate our solutions, we compare the estimated 
+accelerations with those calculated from OBD speed readings.  
+The accuracy of our methods are evaluated with highway and urban traces
+covered by 13,000 miles in the northwestern US.
+We show through our experiments and analysis that
+compared to current state of the art techniques, 
+our method improves the $75$-percentile accuracy 
+by $5\times$ comparing with well-tuned inertial sensors in traditional approach. 
+
+
+

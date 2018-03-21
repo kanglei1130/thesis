@@ -11,7 +11,7 @@ car accident and road congestion.
 In 2015, about 140.43 billion gallons of gasoline were consumed in the United States. 
 Also, according to the US Census Bureau, there are about ten million car accidents every year.
 It has been shown that most car accidents are mainly 
-caused by dangerous driving behaviors \cite{progressive}, such as distracted and/or aggressive driving.  
+caused by dangerous driving behaviors and human mistakes \cite{progressive}. 
 These problems are caused by the lack of understanding, monitoring 
 and careful control on vehicle dynamics. 
 Better understanding and control on vehicle dynamics
@@ -24,26 +24,31 @@ human driving behaviors and better control on vehicles.
 One such example is to use driverless car system to 
 replace human drivers \cite{googledriverlesscar, kumar2012carspeak,
 urmson2008autonomous,litman2013autonomous}. 
-However, there are many unresolved regulatory, legal and insurance issues, 
-so it is not feasible to adopt driverless car in short and medium term.   
-We believe that using existing technologies to assists human drivers
-in user-operated vehicles are more critical for safe and efficient driving activities \cite{you2013carsafe, wang2013sensing, chen2015invisible, uber}. 
-There are smartphone sensing applications that 
-monitor driving behaviors and sensing vehicle's movement \cite{you2013carsafe, wang2013sensing},
+However, it takes time for self-driving systems to be robust enough to 
+replace traditional vehicles. 
+Also, it is unlikely that self-driving
+systems are going to ever achieve perfect accuracy under all
+conditions.
+Meanwhile, some researchers are using existing technologies to assists human drivers
+in user-operated vehicles are more critical for safe 
+and efficient driving activities \cite{you2013carsafe, wang2013sensing, chen2015invisible, uber}. 
 Also, there are in-vehicle systems that assist human drivers with some driving functionalities, 
 e.g., cruise control \cite{bengtsson2001adaptive, cruise_control} and emergence braking system \cite{emergency_brake} etc. 
 However, there are many questions that have not been answered: 
 what is the accuracy of smartphone sensors to capture driving behaviors?
-how to distinguish driver and passenger with zero infrastructure?
 how to assist human drivers to achieve fuel efficient and safe driving?
+how to make self-driving systems more reliable? 
 
 
 With many open questions in mind, we ask a high-level question in this proposal: 
+
 \emph{how can we build sensing and control system blocks for modern vehicles to
 monitor, assist or even replace human drivers in
-improving driving performance, i.e., enhancing fuel efficiency and improving road safety.}
+improving driving performance and experience.}
+
+
 To answer this question, we explore the sensing and control capabilities
-of commodity hardwares and how to utilize on modern vehicles. 
+of commodity hardwares and how to utilize them on modern vehicles. 
 For example, we can use smartphone to sense and capture 
 various driving behaviors, 
 based on which we can evaluate driving performance. 
@@ -51,135 +56,47 @@ We can also access vehicle parameters from OBD
 port \cite{obd} to evaluate our driving behavior detection algorithms. 
 We implemented a smartphone application called DriveSense to collect
 data and verify our algorithms. 
-We also designed and implemented a control system called EcoDrive that 
+We also present a control system called EcoDrive that 
 leverages drive-by-wire technology to control fuel injection
-rate to adjust speed for higher fuel efficiency. 
+rate to find a tradeoff between travel time and fuel efficiency. 
+To handle occational self-driving system failures, 
+we present a live streaming and remote control framework
+called RTDrive to augment self-driving systems. 
+
+
+\section{DriveSense}
+
+\input{drivesense/introduction}
+
+
+\section{EcoDrive}
+
+\input{ecodrive/introduction}
+
+
+\section{RTDrive}
+
+\input{rtdrive/introduction}
+
+\section{Contributions}
 
 
 
-\textbf{Motion and Driving Activity Sensing}. 
-Capturing human driving activities (e.g., brakes) are important
-in lots of road safety applications \cite{uber}, 
-as it has long been believed that there is close relation
-between driving behavior and road safety \cite{progressive}.
-Smartphone becomes an ideal platform due to its rich built-in
-sensors, i.e., accelerometer, gyrosocope and vision sensors etc. 
-We develop smartphone application, called DriveSense 
-to monitor human drivers by using smartphone sensors, 
-i.e., detecting driving events and monitoring driver distractions etc. 
-We design a slope-aware method to estimate vehicle motion by using
-smartphone IMU sensors. 
-It addresses the challenges for coordinate alignment between the smartphone 
-and the car and linear acceleration estimation under various sloping road conditions.
-We further design a smartphone application, called DriveSense, 
-to monitor driving behaviors and driver distractions by using various sensors on smartphone, 
-i.e., IMU sensors, GPS and vision sensors. 
-To evaluate our solutions in larger scale, we implement an Android
-application called DriveSense, that will be released in Google
-App store to benefit more users. 
-We conduct controlled experiments to understand the problems, 
-evaluate our solutions and debug the systems. 
-We also conduct uncontrolled experiments to collect data
-for analysis and evaluate our solutions in the wild. 
+\section{Outline}
 
-
-
-
-\textbf{Vehicle Access and Control}. 
-Direct access to vehicular parameters provides us the ground truth data
-that can be used to verify our models and algorithms. 
-We can access the speed data from the vehicle OBD 
-port to verify speed estimation algorithm. 
-We can also access the fuel usage data to estimate 
-fuel efficiency. 
-With the control the vehicle, we can assist human drivers to 
-achieve higher fuel efficiency (e.g., smart cruise control system) 
-and safer driving (e.g., emergency brake system). 
-EcoDrive is one such example system we built. 
-EcoDrive is a fuel consumption monitoring and control system that can  
-improve fuel efficiency and reduce carbon emissions. 
-EcoDrive models acceleration and instant fuel consumption of individual vehicles
-and emulates gas pedal position sensor 
-(replace gas pedal pressed by human drivers) to control vehicle accelerations. 
-To evaluate our driver assistance systems, we use various methodologies such as 
-data analysis, system implementation and road test. 
-To model vehicle's fuel consumption and capture driving behaviors,
-we collected 5,000 miles urban driving data and 5,000 miles highway
-driving data from 12 different drivers. 
-We also build system prototype that is installed
-on regular vehicle to evaluate its performance. 
-
-
-
-
-We will describe our driver assistance
-systems and proposed further work in high level 
-in the rest of this chapter. 
-The detailed design, analysis, implementation and evaluation of 
-each system are presented in details in following chapters. 
-
-
-\section{Estimating Vehicle Accelerations by Using IMU Sensors}
-
-To better understanding driving behaviors and potentially
-improve road safety, 
-one can use smartphone IMU sensors to estimate vehicle motion, driving
-performance evaluation and real-time warning on aggressive
-events, e.g., hard brakes or rough accelerations. 
-However, it is not an easy task, 
-i.e., we found that even gentle road slopes may cause 
-coordinate misalignment and acceleration over- or under-estimation
-if accelerometer is used. 
-It is an important problem
-to address, given that no road is going to be perfectly level
-— it may slope with a small grade even if it appears level
-to the eye. Our modules solves the problem to continuously
-estimating the slope of the road (and of the vehicle) and using
-this information to more accurately infer true vehicle motion
-parameters, (e.g., acceleration). In particular, we solve three
-related problems. First, even a gentle grade can cause over-
-or under-estimation of brakes and accelerations as detected
-by inertial sensors. Second, road slopes introduce noise on
-coordinate alignment between the smartphone and the vehicle,
-and with existing techniques it takes a long time to converge to an
-accurate value. Third, the accumulated gyroscope error leads to
-inaccurate slope estimations. The error source includes hardware
-limitations and affected component from other dimensions due
-to (even small) misalignment. We implement our solution as a
-software module for smartphones and evaluate its performance
-using traces from drives across 10,000 miles of highway and
-urban roads in the US. Compared to the state of the art, our
-estimation method is more accurate and efficient — our slope-
-aware coordinate alignment algorithm achieves 3 times faster
-on median convergence time and linear acceleration estimation
-method improves linear acceleration estimation accuracy more
-than 2 times on average.
-
-\section{Improving Fuel Efficiency and Reducing Carbon Emissions}
-
-We designed a control system called EcoDrive to improve fuel efficiency
-by modeling fuel consumption and emulating gas pedal position sensor. 
-EcoDrive senses vehicle dynamics through
-the standard vehicle On-board diagnostics (OBD) port and 
-models various vehicle forces, i.e., 
-propulsion, drivetrain loss, wind resistance and grade resistance, 
-as functions of instant fuel consumption. 
-By sensing vehicular speed and controlling air/fuel injection rate in real time, 
-EcoDrive can adjust speed carefully to improve fuel efficiency by
-emulating the gas pedal position sensor. 
-We collected more than 10,000 miles of driving traces from 12 different vehicles
-to build models of vehicle dynamics. 
-Based on the models, a prototype of EcoDrive is implemented in an off-the-shelf 
-embedded platform. 
-The prototype is installed on a 2011 Chevy Impala and 
-evaluated through test drives of more than 100 miles across both
-urban and highway environments. 
-In comparison with human drivers, 
-EcoDrive achieves an average of 20\% higher fuel efficiency in urban road segments 
-and 30\% higher fuel efficiency on highways. 
-
-
-
+The rest of the thesis is organized as follows. 
+In Chapter \ref{chapter_drivesense}, we present
+our driving analytics system DriveSense, which leverages smartphone
+sensors to monitor driving behaviors.
+In Chapter \ref{chapter_ecodrive}, we present EcoDrive, an in-vehicle
+system that can . 
+In Chapter \ref{chapter_rtdrive}, we propose the live streaming
+and remote control framework RTDrive, which can augment
+self-driving systems upon occational failures. 
+In Chapter \ref{chapter_relatedwork}, we compare our work with prior
+approaches and systems to monitor, assist or even replace human
+drivers. 
+We conclude and discuss the avenues for further research in Chapter \ref{chapter_conclusion}.
 
 
 

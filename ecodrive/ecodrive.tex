@@ -1,11 +1,21 @@
 
 \chapter{EcoDrive: A Mobile Sensing and Control System for Fuel Efficient Driving}
+\label{chapter_ecodrive}
 
-
-\section{Introduction}
-
-\input{ecodrive/introduction.tex}
-
+In this chapter, we introduces EcoDrive, 
+a fuel consumption sensing and control system for modern vehicles, implemented
+in an embedded platform, to improve fuel efficiency and reduce carbon emissions. 
+EcoDrive senses vehicle dynamics
+through the standard vehicle On-board diagnostics (OBD)
+port and models various vehicle forces, i.e., propulsion, drivetrain loss, 
+wind resistance and grade resistance, as functions of instant fuel consumption. 
+By sensing vehicular speed and
+controlling air/fuel injection rate in real time, EcoDrive can
+adjust speed carefully to improve fuel efficiency.
+We start with a background of vehicle system, followed by modeling
+of vehicle dynamics and fuel consumption rate, and
+then we will present a dynamic programming algorithm
+to find tradeoffs between travel time and fuel efficiency. 
 
 \section{Preliminaries}
 
@@ -29,24 +39,17 @@
 \input{ecodrive/implementation.tex}
 
 
-\section{Evaluation}
+\section{Experimental Results}
 
 \input{ecodrive/evaluation.tex}
 
-
-\nop{
-\section{Related Work}
-
-\input{ecodrive/related_work.tex}
-
-
-\section{Discussion}
+\section{Issues and Discussion}
 
 \input{ecodrive/discussion.tex}
 
 
-\section{Conclusion}
+\section{Summary of EcoDrive}
 
 \input{ecodrive/conclusion.tex}
-}
+
 

@@ -90,7 +90,13 @@
 
 \newcommand{\nop}[1]{}
 
+\algnewcommand\algorithmicinput{\textbf{Input:}}
+\algnewcommand\Input{\item[\algorithmicinput]}
+\algnewcommand\algorithmicoutput{\textbf{Output:}}
+\algnewcommand\Output{\item[\algorithmicoutput]}
 
+\let\oldReturn\Return
+\renewcommand{\Return}{\State\oldReturn}
 
 %=======================================================================
 % Remove the following lines if appendix tables or figures are present.

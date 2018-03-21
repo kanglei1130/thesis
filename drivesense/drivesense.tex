@@ -1,28 +1,55 @@
 
 \chapter{DriveSense: Practical Driving Analytics with Smartphone Sensors} 
+\label{chapter_drivesense}
 
-\section{Introduction}
+Sensing various driving behaviors, such as accelerations, brakes,
+turns, and change lanes — is of great interest to many applications,
+e.g., understanding drive quality, detecting road conditions, and
+more. Many such applications rely on using smartphone placed in a
+vehicle to collect such data for ease of deployment and use. However,
+several driving analytics techniques in the recent past, including
+our own, make simplifying assumptions that the smartphone is
+stably fixed with certain orientation and the car is driving on flat
+roads. Our deployment experience reveals that existing approaches
+may cause orientation misalignment and acceleration over/under
+estimation due to road slopes and human interactions, which lead
+to significant sensing errors for driving analytics applications.
+In this chapter, we present a smartphone app called DriveSense,
+which addresses these challenges and conduct driving analytics
+accurately by using various smartphone sensors.  
 
-\input{drivesense/introduction.tex}
 
-\section{Motivation}
+\section{The Problems}
 
-\input{drivesense/motivation.tex}
+\input{drivesense/problems.tex}
 
-
-\section{Slope-Aware Coordinate Alignment}
-\label{section_alignment}
-\input{drivesense/alignment.tex}
-
-\section{Linear Acceleration Estimation}
-
-\input{drivesense/linear.tex}
+\section{Sensing with Inertial Sensors}
+\label{imusensors}
+\input{drivesense/imusensors.tex}
 
 
-\nop{
-\section{Evaluation}
+\section{The Promise of GPS in Driving Analytics}
+\label{gps}
+\input{drivesense/gps.tex}
+
+
+\section{Design and Implementation}
+\label{design_implement}
+\input{drivesense/design_implement.tex}
+
+\section{Experimental Results}
+\label{evaluation}
 \input{drivesense/evaluation.tex}
-}
+
+
+\section{Limitation and Discussion}
+
+\input{drivesense/discussion.tex}
+
+
+\section{Summary of DriveSense}
+
+\input{drivesense/conclusion.tex}
 
 
 

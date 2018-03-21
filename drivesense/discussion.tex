@@ -1,0 +1,64 @@
+
+\textbf{Extra Power Consumption of GPS}. 
+The use of GPS will accelerate the power consumption of the smartphone. 
+We believe user experience is more important
+than power consumption within vehicle, 
+where the user is able to charge the smartphone. 
+We find that some vehicle travel recording applications, like DriveWell \cite{cmt} , monitoring GPS information
+in the background. 
+We believe the users are willing to enjoy some 
+vehicle service such as navigation and travel recording
+in exchange for some extra power.  
+
+
+
+\textbf{Better or Worse GPS accuracy}. 
+Our GPS evaluation is limited to existing techniques as well as the
+geographic scope where we collected the data. 
+The GPS has a chance to perform better with more advanced algorithms
+or worse with signals blocked by high buildings. 
+Google has implemented the API which allow the application layer to use raw GNSS data as input
+since Android 7.0 system \cite{android_gnss, google_gnss_tools}.
+With extra input, we believe the accuracy of GPS in commodity 
+smartphone could be improved. 
+The accuracy of GPS in metropolitan cities could be decreased when vehicles are passing through high buildings blocking the GPS signal.
+XSense is a system framework that can alternatively use the best estimation
+Method.
+With the training and modeling techniques presented in this paper, 
+we believe XSense is able to accommodate new techniques.  
+
+\textbf{High-end Vehicles}. 
+There are emerging selfdriving techniques that ultilize 
+expensive hardwares to scan the road, 
+which may provide better accuracy on road condition
+monitoring. 
+Also they could be equipped with built-in sensors
+and alignment is not a problem anymore. 
+But our techniques about linear acceleration
+estimation and fusion with GPS still work
+in such cases. 
+We argue that the majority of existing
+vehicles are still low-end vehicles 
+and we expect they will still dominate 
+the road in the next decade. 
+Our techniques can be used in either high-end 
+or low-end vehicles by using only
+a single smartphone. 
+
+
+\textbf{Device and Orientation Diversity}. 
+We are not able to try all the devices and 
+every possible orientation. 
+The devices we used include Motorola Xoom,
+HTC Hero, LG Nexus 5, LG Nexus 5x and Motorola Nexus 6. 
+The devices are placed in the back pocket of passenger
+seat, vertically /horizontally in car mount holder, 
+car cup holder, passenger seat, pants pocket, 
+and passenger hand.  
+We believe the diversity of devices and orientations in our study are representative enough. 
+We have not observed neither particular device nor 
+the orientation influence on vehicle motion sensing
+with inertial sensors. 
+
+
+

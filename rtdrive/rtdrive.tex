@@ -2,11 +2,31 @@
 
 
 \chapter{RTDrive: Augmenting Self-Driving with Remote Control}
+\label{chapter_rtdrive}
 
-
-\section{Introduction}
-
-\input{rtdrive/introduction.tex}
+Self-driving systems are being designed in recent years 
+to improve road safety by replacing human drivers. 
+In spite of many advances so far, it is unlikely that such systems are
+going to achieve perfect accuracy under all conditions. In
+particular, occasional failures are anticipated when such vehicles
+encounter situations not observed before. Under such
+infrequent failure scenarios, the research community has so
+far, considered two alternatives — to return control to the
+driver in the vehicle, which has its own challenges and limitations,
+or to attempt to safely “park” the vehicle out of
+harm’s way. We consider a viable third alternative — on
+failure of the self-driving function in the vehicle, the system
+could return control to a remote human driver. This remote
+human driver will augment the self-driving system in vehicles,
+only when failures occur, which may be due to bad
+weather, malfunction, contradiction in sensory inputs, and
+other such conditions.
+In this chapter, we present a framework called
+RTDrive, where the remote driver can view the vehicle’s sensory
+data and control the vehicle in real time.
+It includes several modules to improve video encoding
+efficiency and remote control experience, which are
+presented in the rest of this chapter. 
 
 
 \section{Motivation}
@@ -18,26 +38,16 @@
 
 \input{rtdrive/design.tex}
 
-
-
 \section{Implementation}
 
 \input{rtdrive/implementation.tex}
 
-
-
-\section{Evaluation}
+\section{Experimental Results}
 
 \input{rtdrive/evaluation.tex}
 
 
-
-\section{Related Work}
-
-\input{rtdrive/related_work.tex}
-
-
-\section{Conclusion}
+\section{Summary of RTDrive}
 
 \input{rtdrive/conclusion.tex}
 

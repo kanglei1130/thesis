@@ -1,0 +1,198 @@
+
+
+IMU sensors are used in many driving analytics 
+applications \cite{hansenspeed, wang2013sensing, chen2015invisible}. 
+However, existing work assume the car is moving on flat 
+roads and the smartphone is stably mounted in the vehicle. 
+Different from these work, we propose several novel
+techniques to improve the accuracy and usability of inertial sensors
+by detecting orientation change, modeling stability,  
+conducting slope-aware coordinate alignment and linear
+acceleration estimation in a more practical manner. 
+We design a slope-aware solutions to conduct 
+coordinate alignment and track linear acceleration
+by removing the gravity component dynamically from the aligned accelerometer readings. 
+Second, we use clustering techniques to detect 
+relative orientation changes. 
+Third, we use moving variance to model the mounting
+stability of the smartphone and evaluate sensing accruacy
+based on mounting statiblity. 
+
+\subsection{Slope-Aware Alignment}
+\label{slopeaware}
+\input{drivesense/slopeaware.tex}
+ 
+
+\subsection{Detecting Relative Orientation Change}
+
+
+\begin{figure}[!htbp]
+\begin{center}
+\includegraphics[width=1.7in,angle=0]{Figs/DriveSense/example_cluster.pdf}
+\hspace{-0.8cm}
+\includegraphics[width=1.7in,angle=0]{Figs/DriveSense/example_change.pdf}
+\vspace{0.0cm}
+\caption{The accelerometer data in one trip where the smartphone is picked up
+from a pocket and put on the car mount holder. 
+The upper cluster is formed when the user start the app at the beginning
+and put the phone into the pocket, which is also detected by MV method. }
+\vspace{-0.2cm}
+\label{example_change}
+\end{center}
+\end{figure}
+
+
+Using inertial sensors to estimate vehicle motions
+is also vulnerable to smartphone relative orientation changes. 
+Relative orientation refers to the relative orientation 
+between the smartphone and the car.  
+When the smartphone is fixed in the car and 
+the car is moving upslope or making turns, the
+relative orientation of the smartphone does not change 
+as there is no relative movement between the smartphone
+and the car.  
+The relative orientation is usually changed by the smartphone
+user, e.g., moving the smartphone from pocket to the car mount
+for navigation.
+
+
+
+The gyroscope is able to track absolute orientation changes
+of the smartphone \cite{zhou2014use}. 
+Tracking relative orientation change is a different. 
+Since the smartphone is moving at the same pace 
+with the car (suppose the smartphone is mounted), 
+the gyroscope will sense the steering motions of the 
+car, i.e., making turns, driving upslopes etc. 
+It is challenging to separate the movement of the car
+and the movement of the smartphone itself. 
+
+
+We find accelerometer can be used to reliably detect orientation changes. 
+While the movement of the car will introduce noises accelerometer
+readings, but the noises are relatively small ($1-2m/s^2$ in most of the cases) 
+in comparison to the gravitational force sensed by accelerometer. 
+Once there is an orientation change, the gravity components
+sensed by accelerometer are changed dramatically.
+During one test trip, we move the smartphone
+from pocket to car mount holder. 
+The accelerometer sensor readings are illustrated in Fig. \ref{example_change}. 
+All the accelerometer sensor readings can be naturally
+classified into three clusters. 
+The upper small one is formed when the user hold
+the smartphone and manually start the app. 
+The rest two are formed when the smartphone is in 
+the pocket and on the car mount holder, respectively. 
+Intuitively, incremental clustering methods are reasonable 
+choices to identify orientation change, 
+i.e., there is new cluster formed. 
+
+
+\textbf{Incremental Clustering}. Traditional incremental clustering methods can be used in 
+orientation change detection, e.g., 
+orientation change happens when there is another cluster
+emerges. 
+The existing clustering methods are reliable enough
+and tested by many applications 
+\cite{nguyen2015survey, ordonez2003clustering, rodrigues2008hierarchical, song2005highly}. 
+We test several common incremental clustering methods 
+such as Sequential K-means (S-KM), Hierarchical Clustering (HCA) 
+and Gaussian Mixture Models (GMM). 
+The drawback of such approaches is the delay for detecting
+another cluster, i.e., it requires enough data samples
+to form a new cluster. 
+In some real time applications such as brake warnings, 
+false warning may happen if orientation change
+is not detected in the first place. 
+Due to the space limit, We refer interested 
+readers to \cite{nguyen2015survey} for 
+detailed descriptions of different methods.
+
+
+\textbf{Moving Variance (MV)}. To timely detect orientation change before
+another cluster is formed, 
+we look at the change of a moving window.
+The moving window contains $m$ data samples, 
+and we use the variance of the moving window to detect
+orientation changes. 
+The intuition behind is that the changes of sensed gravity components 
+is much more significant than those of caused by vehicle's movements. 
+The variance can be calculated as $Var(x) = E[(X - \mu)^2]$, 
+where $X$ is the euclidean distance to the ``moving cluster''
+center and $\mu$ is the average distance. 
+There are cases that the movement is too small to be detected
+by MV. 
+For example, a small horizontal rotation of the smartphone will not 
+change the variance. 
+We use the stability model to estimate such small changes. 
+We will show in the later section that such looseness
+make the acceleration estimation inaccurate. 
+ 
+ 
+\subsection{Estimating Mounting Stability}
+
+
+
+\begin{figure}[!htbp]
+\begin{center}
+\includegraphics[width=1.7in,angle=0]{Figs/DriveSense/variance_cars.pdf}
+\hspace{-0.5cm}
+\includegraphics[width=1.7in,angle=0]{Figs/DriveSense/sensor_error_cars.pdf}
+\vspace{-0.2cm}
+\caption{The intra-cluster variance distribution of the tight group (car 1-7)
+	and the loose group (car 8-10), and 
+the estimated acceleration accuracy of the tight group is higher than those
+	of the loose group.}
+\vspace{-0.2cm}
+\label{mounting}
+\end{center}
+\end{figure}
+
+
+Another factor affects the accuracy of vehicle motion sensing
+is the mounting stability of the smartphone. 
+The stability of the smartphone depends on how the 
+smartphone is fixed/placed/held in the car. 
+A good case scenario is the user placing the smartphone
+on a stable car mount holder. 
+A bad case scenario is the user or passenger playing
+motion games such as car racing which requires rotating
+the smartphone. 
+The derived sensor readings of the car are over noisy
+due to shaking and/or rotating of the smartphone. 
+
+
+We model one fixed relative orientation as a cluster of 
+sensor readings. 
+We use \emph{intra-cluster variance (ICV)} to estimate 
+the stability of the smartphone.  
+A stable mounting of the smartphone is expected to produce a smaller
+variance than unstable holding by hands.  
+Since ICV is correlated with the cluster
+size, we use the ICV of the subclusters to represent
+the ICV of the whole cluster. 
+We define one subcluster is any continous $n$ 
+points of the whole cluster.  
+We use ICV to evaluate the mounting
+stability of the tablets from dataset $\#1$. 
+We firstly remove all the trips that there is orientation 
+change detected. 
+As shown in Fig. \ref{mounting}, 
+all the data from the 10 cars are naturally divided into two groups, 
+where the first group (car 1-7) has a median variance less than 0.05
+and the second group (car 8-10) has a median variance around 0.2.
+We name the first group as \emph{tight group} and 
+the second one as \emph{loose group}. 
+Since the tablets are not aligned with the cars, 
+we conduct coordinate alignment and linear acceleration
+estimation by using the methods in Section \ref{slopeaware}. 
+We compare the acceleration estimated by aligned accelerometer
+and the groundtruth acceleration calculated by OBD speed. 
+As indicated in Fig. \ref{mounting}, 
+the estimated accuracy of the tight group is generally higher
+than the loose group. 
+
+
+  
+
+
