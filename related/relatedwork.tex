@@ -128,10 +128,32 @@ conducting coordinate alignment efficiently and estimating the linear accelerati
 We believe our module can provide input for vehicular applications 
 to achieve better efficiency. 
 
+ 
+\section{Self-Driving Systems}
+
+There are many corporations and researchers are developing fully self-driving
+techniques, such as Waymo, Mercedes-Benz and AutoX \cite{waymo, benz, autox}.
+Waymo uses LIDAR as the primary input for object detection \cite{waymo}. 
+AutoX proposes camera-first self-driving solution to reduce
+the cost to build a self-driving vehicle \cite{autox}.  
+\cite{cvpr17chen} presents a sensory-fusion perception framework 
+that combines LIDAR point cloud and RGB images as input and 
+predicts oriented 3D bounding boxes. 
+\cite{leonard2008perception} describes the architecture and implementation 
+of an autonomous vehicle designed to navigate using locally perceived 
+information in preference to potentially inaccurate or incomplete map data. 
+\cite{lee2016internet} presents networked self-driving vehicles to coordinate 
+and form an edge computing platform. 
+We believe our remote control framework can act the safe backup
+for such self-driving systems.
+Different from \cite{kang2018rc}, which presents high level possible 
+challenges and directions, 
+our work present the design and implementation of a working system.  
 
 
 
-\subsection{Live Video Streaming}
+
+\section{Live Streaming Protocols}
 \nop{
 Internet video streaming protocols can be classified into
 two major fields based on application scenarios.
@@ -150,6 +172,8 @@ encrypted RTMP (Real Time Messaging Protocol).
 Youtube is using Real Time Streaming Protocol (RTSP) 
 and Netflix is using TCP \cite{rao2011network}
 }
+
+\subsection{Live Stream Measurement}
 
 Measuring live streaming applications such as Skype and Hangout
 is an active area of research. 
@@ -174,46 +198,6 @@ differentiate us from the measurement study of exisiting
 VoIP services. 
 Real time streaming of pre-recorded video such as YouTube and Netflix \cite{rao2011network}
 are not closely related to the application scenario in this work. 
-
-
-\subsection{Sensing Vehicle Dynamics}
-
-The smartphone built-in sensors enable lots of vehicular applications
-that sense vehicle movements and capture driving behaviors 
-\cite{hansenspeed, wang2013sensing, chen2015invisible, uber, cmtelematics}. 
-\cite{hansenspeed} uses an accelerometer to estimate vehicular speed. 
-\cite{wang2013sensing} captures turns to determine driver phone
-use by comparing centrifugal force with a reference point. 
-\cite{chen2015invisible} develops a middleware that can detect 
-and differentiate various vehicle maneuvers, 
-including lane changes, turns, and driving on curvy roads,
-by using non-vision sensors.
-\cite{singh2013using, fazeen2012safe} use inertial sensors to detect the driving quality of the
-driver.
-Our work utilize these techniques to sense driving context 
-to improve video encoding efficiency.  
-
- 
-\subsection{Self-Driving Systems}
-
-There are many corporations and researchers are developing fully self-driving
-techniques, such as Waymo, Mercedes-Benz and AutoX \cite{waymo, benz, autox}.
-Waymo uses LIDAR as the primary input for object detection \cite{waymo}. 
-AutoX proposes camera-first self-driving solution to reduce
-the cost to build a self-driving vehicle \cite{autox}.  
-\cite{cvpr17chen} presents a sensory-fusion perception framework 
-that combines LIDAR point cloud and RGB images as input and 
-predicts oriented 3D bounding boxes. 
-\cite{leonard2008perception} describes the architecture and implementation 
-of an autonomous vehicle designed to navigate using locally perceived 
-information in preference to potentially inaccurate or incomplete map data. 
-\cite{lee2016internet} presents networked self-driving vehicles to coordinate 
-and form an edge computing platform. 
-We believe our remote control framework can act the safe backup
-for such self-driving systems.
-Different from \cite{kang2018rc}, which presents high level possible 
-challenges and directions, 
-our work present the design and implementation of a working system.  
 
 
 \subsection{Reducing Network Latency}
