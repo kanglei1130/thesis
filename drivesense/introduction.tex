@@ -46,41 +46,6 @@ tilted due to the slope of a road.
 
 
 
-
-\nop{
-As a consequence, it is worth considering whether an alternative approach to detecting these
-motion parameters is possible through the use of GPS.
-Clearly, GPS is widely used in many outdoor applications to identify location and even speed,
-and acceleration can be determined by observing changes in speed.
-Use of GPS has one big advantage --- we do not need to do orientation corrections between
-device and vehicle and makes the computation both simpler and more robust.
-However, low-cost GPS receivers that are available in common mobile devices have other problems.
-They do not always have
-sufficient resolution to accurately estimate some short timescale events, e.g., rotation
-speeds, acceleration and brakes.
-Further, such GPS devices do not always have the greatest accuracy and resolution in location
-estimation, 
-which may also lead to additional errors in estimating acceleration
-and brakes.
-}
-
-
-\nop{
-In this paper, we therefore, first, conduct a study of whether some of the vehicular motion
-parameters of interest, especially those related to acceleration, brakes, and turns, 
-can be estimated accurately when there are slopes.
-To understand the performance of GPS and inertial sensors for these purposes,
-we use measured data from vehicles collected through more than 10,000 miles of
-motion, 
- which provide GPS data and inertial sensor measurements from mobile devices and 
- some independently logged speed data from the On-board Diagnostics (OBD)
-interfaces of the same vehicle.
-}
- 
-%Based on our evaluation of GPS accuracy over more than 10,000 miles of 
-%driving data
-
-
 To understand and improve the performance of inertial sensors, 
 we develop several 
 techniques to detect orientation changes, model mounting stability, 
@@ -112,7 +77,7 @@ In particular, we find that GPS is more accurate in high speed scenarios and
 only well-tuned inertial sensors can achieve comparable accuracy. 
 
 
-The second goal of this paper is to use the above observations to develop a combined system
+The second goal of this work is to use the above observations to develop a combined system
 to conduct driving analytics, called DriveSense, a mobile application that achieve
 higher estimation accuracy due to slope awareness, and leverages GPS to complement
 inertial sensors, when the latter lacks necessary accuracy and not available. 
