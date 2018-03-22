@@ -1,6 +1,68 @@
 
-\begin{enumerate}
-  \begin{algorithm}[H]
+\begin{algorithm}[ht]
+ \caption{Check if I-frame is required by sensing vehicle dynamics}
+	\label{contextaware}
+    \begin{algorithmic}[1]
+\Function{requireKeyFrame}{$gps, gyro$}
+  \State $now = currentTimeMillis()$
+  \State $init = false$
+  \If {$timestamp\_ == -1$}
+    \State $init = true$
+    \Return $true$
+  \Else
+    \State $dur = now - timestamp\_$
+    \State $dist\_ = dist\_ + gps\_.speed() * dur$    
+    \State $deg\_ = deg\_ + gyro\_.angular() * dur$
+  \EndIf
+  \State $timestamp\_ = now$, $gps\_ = gps$, $gyro\_ = gyro$
+  \If {$init || dist\_ >= \theta_{dist} || deg\_ >= \theta_{degree} || now - check\_ >= \theta_{t}$}
+    \State $dist\_ = 0$
+    \State $deg\_ = 0$
+    \State $check\_ = now$
+    \Return $true$
+  \Else
+    \Return $false$
+  \EndIf
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+
+
+
+  \begin{algorithm}[ht]
+   \caption{Consistent-Latency View Buffering Algorithm}
+    \label{algorithm_clv}
+    \begin{algorithmic}[1]
+\Function{consistentLatencyDisplay}{$frame$}
+  \State $counter = counter + 1$
+  \State $now = currentTimeMillis()$
+  \State $diff = now - frame.sendTime$
+  \If {$counter > 1 \&\& diff > \delta{t}\_$}
+    \State $deviation = diff - \delta{t}\_$
+    \State $\sigma{t}\_ = \beta{t} * deviation + (1 - \beta{t}) * \sigma{t}\_$
+  \EndIf
+  \If {$counter == 1$}
+    \State $\delta{t}\_ = diff$
+  \Else
+    \State $\delta{t}\_ = \alpha * diff + (1 - \alpha) * \delta{t}\_$
+  \EndIf
+  \State $delay = (\delta{t}\_ + \sigma{t}\_) - diff$
+  \If {$delay > 0$}
+    \State $sleep(delay)$
+  \EndIf
+  \State $sendFrameToDisplay(frame.payload)$
+  \State $storeFrame(frame)$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+
+
+
+
+
+  \begin{algorithm}[ht]
    \caption{FEC Packets Buffering}
     \label{fec_buffer}
     \begin{algorithmic}[1]
@@ -11,7 +73,7 @@ pkt - Frame packet}
   \State ${id} = pkt.id$
   \State ${k} = pkt.k$
   \If {$curid < id$}
-    \State \Return
+    \Return
   \EndIf
   \If {$curid == id$}
     \State $buffer.insert(pkt)$
@@ -31,7 +93,7 @@ pkt - Frame packet}
 \EndFunction
 \end{algorithmic}
 \end{algorithm}
-\end{enumerate}
+
 
 
 

@@ -1,6 +1,7 @@
 
 
 
+
 To illustrate how vehicle system works 
 and how each components are related to different OBD parameters,
 we present a high-level vehicle system control 
@@ -56,35 +57,6 @@ This contrasts with Step
 Automatic Transmissions (SAT) that offer a fixed number of gear ratios.
 
 \subsection{OBD Parameters}
-
-\begin{table}[!htbp]
-        \centering
-        \caption[obd_data]{Collected OBD Data}
-         \vspace{0.5cm}
-        \label{obd_data}
-                \begin{tabular}{|l|c|c|}
-                \hline
-Name & PID & Unit 
-\\  \hline      \hline
-Fuel Level (FL) & 2F & $\%$     
-\\  \hline
-Mass Air Flow Rate (MAF) & 10 & g/s   
-\\   \hline
-Fuel System Status (FSS) & 03  & Bitmask  
-\\  \hline
-Long Term Fuel Trim (LTFT) & 07  &  $\%$  
-\\  \hline
-Short Term Fuel Trim (STFT) & 06 &  $\%$  
-\\   \hline
-Vehicular Speed (VS) &  0D &  km/h   
-\\  \hline
-Engine RPM (RPM) & 0C & rpm 
-\\   \hline
-Accelerator Position (AP) & 5A & $\%$  
-\\   \hline
-      \end{tabular}
-\end{table}
-
 
 On-board diagnostics (OBD) is an automotive 
 term referring to a vehicle's 
@@ -153,105 +125,6 @@ Engine RPM is measured by the rotation speed of the engine motor.
 
 \subsection{Dataset}
 
-
-\begin{table}[t]
-        \centering
-        \caption[vehicles]{Vehicles (distance in miles)}
-         \vspace{0.5cm}
-        \label{vehicles}
-                \begin{tabular}{|c|c|c|c|c|c|}
-                \hline
-No. & Car Model  & Urban & Highway  
-\\  \hline      \hline
-%lei
-1  & Chevrolet Impala 2011 &  1051   &  852
-\\  \hline
-%bozhao
-2 & Nissan Rogue 2011   &  1198 &  1063 
-\\   \hline
-%xun zhao
-3 & Subaru Forester 2011 & 651  & 757
-\\   \hline
-%jianqiao
-4  &Buick LaCrosse 2006 & 599  & 649 
-\\   \hline
-%ling zheng
-5  & Volkswagen Tiguan 2014  & 600  & 347 
-\\   \hline
-%zhubo
-6 & Honda Accord  2013 & 173 & 840
-\\   \hline
-%lixing
-7 & Toyota Camry 2011    & 35  &  338
-\\   \hline
-%hao wu
-8  & Volkswagen Touareg 2014  & 21  & 156 
-\\   \hline
-%altima
-9 & Nissan Altima 2014  & 193 & 271
-\\ \hline
-%zhen yang
-10 & Nissan Rogue 2011   & 105  &  0 
-\\ \hline
-%rho
-11 & Subaru Legacy 2015 & 119 & 30
-\\   \hline
-%yangsong
-12 & Mazda CX5 2014 & 202  & 89
-\\   \hline
-    \end{tabular}
-\end{table}
-
-
-\nop{
-\begin{table*}[t]
-        \centering
-        \caption[vehicles]{Vehicles used to collect OBD data}
-         \vspace{0.5cm}
-        \label{vehicles}
-                \begin{tabular}{|c|c|c|c|c|c|}
-                \hline
-No. & Car Make and Model & Year & Transmission Type  & Urban Miles & Highway Miles  
-\\  \hline      \hline
-%lei
-1  & Chevrolet Impala & 2011 & SAT &  1051   &  852
-\\  \hline
-%bozhao
-2 & Nissan Rogue & 2011 & CVT   &  1198 &  1063 
-\\   \hline
-%xun zhao
-3 & Subaru Forester & 2011 & SAT  & 651  & 757
-\\   \hline
-%jianqiao
-4  &Buick LaCrosse & 2006 & SAT  & 599  & 649 
-\\   \hline
-%ling zheng
-5  & Volkswagen Tiguan & 2014 & SAT  & 600  & 347 
-\\   \hline
-%zhubo
-6 & Honda Accord  & 2013  &  CVT & 173 & 840
-\\   \hline
-%lixing
-7 & Toyota Camry & 2011 & SAT   & 35  &  338
-\\   \hline
-%hao wu
-8  & Volkswagen Touareg & 2014 & SAT  & 21  & 156 
-\\   \hline
-%altima
-9 & Nissan Altima & 2014 & CVT & 193 & 271
-\\ \hline
-%zhen yang
-10 & Nissan Rogue & 2011 & CVT   & 105  &  0 
-\\ \hline
-%rho
-11 & Subaru Legacy & 2015  & CVT & 119 & 30
-\\   \hline
-%yangsong
-12 & Mazda CX5 & 2014 & SAT & 202  & 89
-\\   \hline
-    \end{tabular}
-\end{table*}
-}
 
 
 \begin{figure}[t]
@@ -342,6 +215,5 @@ distances of each road segment etc.
 EcoDrive can be used as a subsystem to predict fuel consumption
 of possible routes \cite{ganti2010greengps} and 
 calculate the optimal driving strategy.  
-
 
 

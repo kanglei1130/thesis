@@ -3,7 +3,7 @@
 
 \begin{figure}[t]
 \centering
-  \includegraphics[width=3.4in,angle=0]{Figs/RTDrive/architecture.pdf}
+  \includegraphics[width=4.0in,angle=0]{Figs/RTDrive/architecture.pdf}
 \caption{The architecture of the live streaming and control system.}
 \vspace{-0.5cm}
 \label{server}
@@ -34,26 +34,26 @@ and display the streaming video to the operator.
 
 
 
-\begin{figure*}[ht]
-  \begin{subfigure}[t]{0.32\textwidth}
+\begin{figure}[ht]
+  \begin{subfigure}[t]{0.3\textwidth}
     \includegraphics[width=\linewidth]{Figs/RTDrive/I_P_frame_size.pdf}
-    \caption{The size distribution of I-frames and P-frames under three different resolutions and bitrates.}
+    \caption{The size distribution of I/P-frames under various bitrates.}
     \label{frame_size}
   \end{subfigure}
 \hspace{0.3cm}
-  \begin{subfigure}[t]{0.32\textwidth}
+  \begin{subfigure}[t]{0.3\textwidth}
     \includegraphics[width=\linewidth]{Figs/RTDrive/video_bitrate_quality.pdf}
     \caption{Video quality under different video bitrates (unit: mbps).}
     \label{bitrate_quality}
   \end{subfigure}
 \hspace{0.3cm}
-  \begin{subfigure}[t]{0.32\textwidth}
+  \begin{subfigure}[t]{0.3\textwidth}
     \includegraphics[width=\linewidth]{Figs/RTDrive/intervals.pdf}
     \caption{Illustration of I-frame interval and video quality.}
     \label{interval}
   \end{subfigure}
 \caption{Video encoding and image quality.}
-\end{figure*}
+\end{figure}
 
 
 \subsection{Context-Aware Video Encoding}
@@ -232,37 +232,6 @@ The $check\_$ refers to the checkpoint where last I-frame is created.
 The algorithm checks the accumulated distance, angles and time
 to decide if next frame should be I-frame or P-frame. 
 
-%\begin{enumerate}
-  \begin{algorithm}[t]
-   \caption{Check if I-frame is required by sensing vehicle dynamics}
-    \label{contextaware}
-    \begin{algorithmic}[1]
-\Function{requireKeyFrame}{$gps, gyro$}
-  \State $now = currentTimeMillis()$
-  \State $init = false$
-  \If {$timestamp\_ == -1$}
-    \State \Return $init = true$
-  \Else
-    \State $dur = now - timestamp\_$
-    \State $dist\_ = dist\_ + gps\_.speed() * dur$    
-    \State $deg\_ = deg\_ + gyro\_.angular() * dur$
-  \EndIf
-  \State $timestamp\_ = now$
-  \State $gps\_ = gps$
-  \State $gyro\_ = gyro$
-  \If {$init || dist\_ >= \theta_{dist} || deg\_ >= \theta_{degree} || now - check\_ >= \theta_{t}$}
-    \State $dist\_ = 0$
-    \State $deg\_ = 0$
-    \State $check\_ = now$
-    \State \Return $true$
-  \Else
-    \State \Return $false$
-  \EndIf
-\EndFunction
-\end{algorithmic}
-\end{algorithm}
-%\end{enumerate}
-
 
 
 \subsection{Live Streaming Protocol}
@@ -389,35 +358,6 @@ the bandwidth according to current frame.
 \subsubsection{Consistent-Latency View (CLV)}
 \label{sec_clv}
 
-%\begin{enumerate}
-  \begin{algorithm}[t]
-   \caption{Consistent-Latency View Buffering Algorithm}
-    \label{algorithm_clv}
-    \begin{algorithmic}[1]
-\Function{consistentLatencyDisplay}{$frame$}
-  \State $counter = counter + 1$
-  \State $now = currentTimeMillis()$
-  \State $diff = now - frame.sendTime$
-  \If {$counter > 1 \&\& diff > \delta{t}\_$}
-    \State $deviation = diff - \delta{t}\_$
-    \State $\sigma{t}\_ = \beta{t} * deviation + (1 - \beta{t}) * \sigma{t}\_$
-  \EndIf
-  \If {$counter == 1$}
-    \State $\delta{t}\_ = diff$
-  \Else
-    \State $\delta{t}\_ = \alpha * diff + (1 - \alpha) * \delta{t}\_$
-  \EndIf
-  \State $delay = (\delta{t}\_ + \sigma{t}\_) - diff$
-  \If {$delay > 0$}
-    \State $sleep(delay)$
-  \EndIf
-  \State $sendFrameToDisplay(frame.payload)$
-  \State $storeFrame(frame)$
-\EndFunction
-\end{algorithmic}
-\end{algorithm}
-%\end{enumerate}
-
 
 
 Each frame suffers different latencies over the wireless 
@@ -477,108 +417,7 @@ complex and out of scope of this work.
 Interested readers may refer to \cite{waymo, canny1987computational, viola2001rapid} for more
 details on identifying objects towards building a fully self-driving vehicle. 
 
-\nop{
-\subsection{In-Lane Self-Driving}
-
-We implement an Android-powered in-lane self-driving system, 
-where the vehicle can navigate within lane boundries
-and identify potential blockage. 
-The design and implementation of an universal self-driving system is very
-complex and out of scope of this work. 
-
-
-\subsubsection{Blockage and Object Detection}
-
-
-\begin{figure}[t]
-\centering
-\vspace{-0.0cm}
-\includegraphics[width=2.6in,angle=0]{Figs/RTDrive/road_closed.png}
-\vspace{-0.0cm}
-\caption{Road blockage and object detection by TensorFlow in Android Camera Preview mode.}
-\vspace{-0.2cm}
-\label{road_closed}
-\centering
-\end{figure}
-
-\begin{figure}[t]
-\centering
-\vspace{-0.0cm}
-\includegraphics[width=2.6in,angle=0]{Figs/RTDrive/lane_markers.png}
-\vspace{-0.0cm}
-\caption{Lane marker and road boundary detection by using OpenCV Canny edge detector
-in OpenCV preview mode.}
-\vspace{-0.2cm}
-\label{lane_marker}
-\centering
-\end{figure}
-
-We use TensorFlow to detect objects and road blockage. 
-TensorFlow Core programs consists of two discrete sections, 
-building the computational graph and 
-running the computational graph \cite{abadi2016tensorflow}.
-A computational graph is a series of TensorFlow operations arranged into a graph of nodes. 
-In this graph, each node takes zero or more tensors 
-as inputs and produces a tensor as an output. 
-Nodes in the graph represent mathematical operations, 
-while the graph edges represent the multidimensional 
-data arrays (tensors) communicated between them. 
-Building the computational graph is to use labeled data 
-to train the parameters of the graph, 
-running the computational graph is to predict the 
-outcome given the inputs. 
-In our implementation, the computational graph is a blackbox, 
-i.e., the input is the image data and 
-the output is the identified object. 
-We use a prebuilt computational
-graph to identify objects and road signs. 
-A ``road closed'' sign is identified in Fig. \ref{road_closed}
-with a confidential value 0.76 
-(higher value means stronger confidence, 1 means the best). 
-If such a similar blockage is detected and the self-driving
-system cannot handle, the control is transferred to the
-remote operator.  
-We refer interested
-readers to \cite{abadi2016tensorflow, huang2016speed} for detailed graph tranning
-and running in TensorFlow.
-
-
-\subsubsection{Lane Marker and Road Boundary Detection}
-
-
-We use Canny edge detector, 
-Color detector and herustic algorithms to track lane markers and road boundaries. 
-Canny edge detector is a multi-stage edge detection
-algorithm. 
-It uses Gaussian filter to smooth the image in order to remove the noise, 
-and then finds the intensity gradients of the image to determine
-all possible edges. 
-The weak edges are removed if weak or not connected with strong edges. 
-Canny edge detector helps us to find the lane and road boundaries. 
-To determine the lanes, we use color detector to find all
-white and yellow lanes, given the lane markers are either white
-or yellow on most roads in US. 
-The lane marker and road boundary detection is illusrated in Fig. \ref{lane_marker}. 
-
-
-\subsubsection{Steering Angle Estimation}
-
-To estimate the steering angle, we use a heuristic algorithm. 
-There could be more than one lane in a road segment
-and we also need to label the current lane of interest. 
-We search from the center of the camera, assuming 
-the camera is at the center of the car. 
-The first lane markers on both the left side and right side
-form the current lane. 
-If the lane is straight, then the image view ends at a vanish point
-that the lane markers of both side point to. 
-The vanish point and the lane markers form a triangle. 
-If the lane is curving, then the lane markers of either side
-will deviate from this triangle. 
-The steering angle is estimated by the coordinates difference
-between the triangle and the curved lane markers.   
-
- }
+ 
 
 
 

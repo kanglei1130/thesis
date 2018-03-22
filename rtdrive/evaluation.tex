@@ -5,7 +5,7 @@ in this section, we evaluate the context-aware encoding algorithm
 and live streaming protocol. 
 
 
-\begin{figure*}[ht]
+\begin{figure*}[!t]
   \centering
   \begin{subfigure}[t]{0.25\textwidth}
     \includegraphics[width=\linewidth]{Figs/RTDrive/evaluation/frames/default_0.png}
@@ -97,15 +97,15 @@ all the images are with good quality.
 \label{sec_selection}
 
 
-\begin{figure}[ht]
+\begin{figure*}[t]
 \centering
-  \begin{subfigure}[t]{0.24\textwidth}
+  \begin{subfigure}[t]{0.5\textwidth}
     \includegraphics[width=\linewidth]{Figs/RTDrive/evaluation/context_dist.pdf}
     \vspace{-0.5cm}
     \caption{Distance threshold.}
     \label{param_dist}
   \end{subfigure}%
-  \begin{subfigure}[t]{0.24\textwidth}
+  \begin{subfigure}[t]{0.5\textwidth}
     \includegraphics[width=\linewidth]{Figs/RTDrive/evaluation/context_gyro.pdf}
     \vspace{-0.5cm}
     \caption{Angle threshold.}
@@ -116,7 +116,7 @@ all the images are with good quality.
   \label{parameters}
   \vspace{-0.25cm}
 \centering
-\end{figure}
+\end{figure*}
 
 
 The performance context-aware video encoding method depends on
@@ -147,7 +147,7 @@ thresholds.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=2.8in,angle=0]{Figs/RTDrive/evaluation/context_quality.pdf}
+\includegraphics[width=3.6in,angle=0]{Figs/RTDrive/evaluation/context_quality.pdf}
 \caption{Video quality under default encoding method
 and context-aware encoding method.}
 \vspace{-0.2cm}
@@ -183,7 +183,7 @@ fixed interval encoding method.
   \end{subfigure}
   \begin{subfigure}[t]{0.26\textwidth}
     \includegraphics[width=\linewidth]{Figs/RTDrive/evaluation/position_fewerpoints.pdf}
-    \caption{Parking control illustration.}
+    \caption{Parking illustration.}
     \label{consistent:illustration}
   \end{subfigure}%
   \begin{subfigure}[t]{0.26\textwidth}
@@ -265,10 +265,10 @@ estimation module of the protocol.
 
 \subsubsection{FEC and Video Quality}
 
-\begin{figure}[t]
+\begin{figure}[ht]
 \centering
 \vspace{-0.3cm}
-\includegraphics[width=2.6in,angle=0]{Figs/RTDrive/evaluation/video_quality_errorbars.pdf}
+\includegraphics[width=3.6in,angle=0]{Figs/RTDrive/evaluation/video_quality_errorbars.pdf}
 \vspace{-0.3cm}
 \caption{Video quality under different loss rates.}
 \vspace{-0.2cm}
@@ -282,13 +282,13 @@ estimation module of the protocol.
   \begin{subfigure}[t]{0.33\textwidth}
     \includegraphics[width=\linewidth]{Figs/RTDrive/evaluation/fec_ratio.pdf}
     \vspace{-0.5cm}
-    \caption{FEC ratio under various loss rate.}
+    \caption{FEC ratio vs. loss rate.}
     \label{fec_ratio}
   \end{subfigure}%
   \begin{subfigure}[t]{0.33\textwidth}
     \includegraphics[width=\linewidth]{Figs/RTDrive/evaluation/bandwidth.pdf}
     \vspace{-0.5cm}
-    \caption{Bandwidth estimation and adaptation.}
+    \caption{Bandwidth adaptation.}
     \label{bandwidth}
   \end{subfigure}%
   \begin{subfigure}[t]{0.33\textwidth}
@@ -389,26 +389,26 @@ and our protocol can track packet loss rate closely.
 \subsubsection{End-to-End Latency Breakdown}
 
 
-\begin{table*}[t]
+\begin{table}[ht]
   \centering
   \caption[latency]{Latency Breakdown}
   \vspace{-0.0cm}
   \label{latency}
   \begin{tabular}{|c|c|c|c|c|c|c|}
   \hline
-Modules & Lane Detector & Object Detector  &  Frame Encoding  &  Serial & Wireless Network  & End-to-end  
+Modules & Lane and Object Detector  &  Frame Encoding  &  Wireless Network  & End-to-end  
 \\  \hline
-Latency & 38ms & 30ms & 21-42ms & 2-10ms & 40-200ms & 200-500ms
+Latency & 38ms  & 21-42ms &  40-200ms & 200-500ms
 \\  \hline      
   \end{tabular}
   \vspace{-0.0cm}
-\end{table*}
+\end{table}
 
 
-\begin{figure}[t]
+\begin{figure}[ht]
 \centering
 \vspace{-0.0cm}
-\includegraphics[width=2.4in,angle=0]{Figs/RTDrive/evaluation/endtoend.pdf}
+\includegraphics[width=3.6in,angle=0]{Figs/RTDrive/evaluation/endtoend.pdf}
 \vspace{-0.2cm}
 \caption{The end-to-end streaming and display latency measurement.}
 \vspace{-0.2cm}

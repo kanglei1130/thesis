@@ -1,0 +1,28 @@
+\begin{algorithm}
+\caption{Angle Search Algorithm}
+\label{search}
+\begin{algorithmic}[1]
+\Input{$D_a$: The 2D accelerometer data after horizontal alignment}
+\Output{$\theta_{o}$: The best fit angle}
+\Procedure{AngleSearch}{}
+\State $dev_{min} \gets MAX$;
+\State $D_{t} \gets []$;
+\For{$\theta$ \texttt{in} (-$\alpha$, $\alpha$)}
+\For{$[y_i, z_i]$ \texttt{in} $D_a$}
+\State $M_\nu$ $\gets$ $\begin{bmatrix}\cos\theta & -\sin\theta\ \\ \sin\theta & \cos\theta \end{bmatrix}$;
+\State $[y'_i,z'_i]$ $\gets$ $[y_i,z_i]* M_\nu$;
+\State $D_t.push(z'_i)$;
+\EndFor
+\State $dev_x \gets deviation(D_t)$;
+\If {$dev_x < dev_{min}$}
+\State {$dev_{min}$ $\gets$ $dev_x$};
+\State {$\theta_{o}$ $\gets$ $\theta$};
+\EndIf
+\EndFor
+\Return $\theta_{o}$;
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+\vspace{-0.6cm}
+
+

@@ -1,12 +1,13 @@
 
 
-\begin{figure}[!tbph]
+\begin{figure}[ht]
+\center
 \vspace{0.0cm}
 \hspace{-0.5cm}
-\includegraphics[width=1.8in,angle=0]{Figs/DriveSense/phone3d.pdf}
+\includegraphics[width=2.8in,angle=0]{Figs/DriveSense/phone3d.pdf}
 \vspace{0.0cm}
 \hspace{-1.0cm}
-\includegraphics[width=1.8in,angle=0]{Figs/DriveSense/car3d.pdf}
+\includegraphics[width=2.8in,angle=0]{Figs/DriveSense/car3d.pdf}
 \vspace{-0.2cm}
 \caption{Coordinate system difference between a smartphone $[x, y, z]$ and a car $[x', y', z']$.}
 \vspace{0.2cm}
@@ -101,7 +102,8 @@ R_h
 
 
 
-\begin{figure}[!tbph] 
+\begin{figure}[ht] 
+\center
 \hspace{-0.4cm}
   \includegraphics[width=2.6in,angle=0]{Figs/DriveSense/slopeaware/stateoftheart.pdf}
 \hspace{-0.0cm}
@@ -117,10 +119,9 @@ approach (above) and slope-aware multi-segment method (below).}
 
 
 
-\begin{figure}[!htbp]
+\begin{figure}[ht]
 \begin{center}
-%\includegraphics[width=1.7in,angle=0]{Figs/DriveSense/trainlengthanderror.pdf}
-\includegraphics[width=2.0in, angle=0]{Figs/DriveSense/uncertain_vertical.pdf}
+\includegraphics[width=3.0in, angle=0]{Figs/DriveSense/uncertain_vertical.pdf}
 \vspace{0.0cm}
 	\caption{
 Since the actual acceleration of the car 
@@ -133,33 +134,6 @@ the direction of force is uncertain when conducting vertical alignment.
 \end{figure}
 
 
-
-\begin{algorithm}
-\caption{Angle Search Algorithm}
-\label{search}
-\begin{algorithmic}[1]
-\Input{$D_a$: The 2D accelerometer data after horizontal alignment}
-\Output{$\theta_{o}$: The best fit angle}
-\Procedure{AngleSearch}{}
-\State $dev_{min} \gets MAX$;
-\State $D_{t} \gets []$;
-\For{$\theta$ \texttt{in} (-$\alpha$, $\alpha$)}
-\For{$[y_i, z_i]$ \texttt{in} $D_a$}
-\State $M_\nu$ $\gets$ $\begin{bmatrix}\cos\theta & -\sin\theta\ \\ \sin\theta & \cos\theta \end{bmatrix}$;
-\State $[y'_i,z'_i]$ $\gets$ $[y_i,z_i]* M_\nu$;
-\State $D_t.push(z'_i)$;
-\EndFor
-\State $dev_x \gets deviation(D_t)$;
-\If {$dev_x < dev_{min}$}
-\State {$dev_{min}$ $\gets$ $dev_x$};
-\State {$\theta_{o}$ $\gets$ $\theta$};
-\EndIf
-\EndFor
-\Return $\theta_{o}$;
-\EndProcedure
-\end{algorithmic}
-\end{algorithm}
-\vspace{-0.6cm}
 
 
 \textbf{Step 3: Slope-Aware Alignment}. 
@@ -197,11 +171,11 @@ Form \ref{search}.
 
 \begin{figure*}[t]
 \begin{center}
-\includegraphics[width=2.2in,angle=0]{Figs/DriveSense/slopeaware/accspeed.pdf}
+\includegraphics[width=2.0in,angle=0]{Figs/DriveSense/slopeaware/accspeed.pdf}
 \hspace{-0.0cm}
-\includegraphics[width=2.2in,angle=0]{Figs/DriveSense/slopeaware/gyrocompare.pdf}
+\includegraphics[width=2.0in,angle=0]{Figs/DriveSense/slopeaware/gyrocompare.pdf}
 \hspace{-0.0cm}
-\includegraphics[width=2.2in,angle=0]{Figs/DriveSense/slopeaware/acccompare.pdf}
+\includegraphics[width=2.0in,angle=0]{Figs/DriveSense/slopeaware/acccompare.pdf}
 \hspace{-0.0cm}
 \vspace{-0.2cm}
 \caption{Slope-Aware coordinate alignment and linear acceleration estimation. 

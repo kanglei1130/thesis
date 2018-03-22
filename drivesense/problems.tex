@@ -35,23 +35,24 @@ smartphone is not stably mounted.
 \subsubsection{Acceleration Over/Under Estimation}
 
 
-\begin{figure}[!tbp] \centering
-    \begin{subfigure}[b]{\linewidth}
-         \includegraphics[width=3.3in,angle=0]{Figs/DriveSense/slopeaware/motivation.pdf}
-         \vspace{-0.4cm}
-         \caption{The accelerometer y-axis (along the car's heading direction) and OBD speed readings.}         
-        \label{motivation:a}
-    \end{subfigure} %
 
-    \begin{subfigure}[b]{\linewidth}    
-        \includegraphics[width=3.3in,angle=0]{Figs/DriveSense/slopeaware/gyro_motivation.pdf}
-        \vspace{-1.5cm}
-        \caption{The accumulated gyroscope x-axis (tracking car's rotational speed when going upslope/downslope) readings.}
-        \label{motivation:b}    
-    \end{subfigure} 
-\caption{Sensor and OBD data from the motivation example trip.}
-\label{motivation}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=3.6in,angle=0]{Figs/DriveSense/slopeaware/motivation.pdf}
+\caption{The accelerometer y-axis (along the car's heading direction) and OBD speed readings.}         
 \vspace{-0.2cm}
+\label{motivation_a}
+\centering
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=3.6in,angle=0]{Figs/DriveSense/slopeaware/gyro_motivation.pdf}
+ \vspace{-1.5cm}
+\caption{The accumulated gyroscope x-axis (tracking car's rotational speed when going upslope/downslope) readings.}
+\vspace{-0.2cm}
+\label{motivation_b}    
+\centering
 \end{figure}
 
 
@@ -63,7 +64,7 @@ the smartphone with a frame mounted between the driver seat
 and the passenger seat.
 The coordinates of the phone are manually aligned (as precisely as we can) with the car. 
 We use a customized Android application to record the sensor data and OBD speed data.
-The sensor and OBD data traces of the trip are illustrated in Fig. \ref{motivation}.
+The sensor and OBD data traces of the trip are illustrated in Fig. \ref{motivation_a}.
 As can be seen from the figure, the trip started on a flat road
 and the speed was $0m/s$ with acceleration $0m/s^2$. 
 At time $210s$, there is a stop as the OBD speed reading was $0m/s$ 
@@ -85,7 +86,7 @@ cause acceleration over/under estimation}.
 The gyroscope can be used to track three-dimensional angular changes
 and is an ideal input for slope estimation. 
 However, it is known to suffer accumulated errors \cite{zhou2014use}. 
-As illustrate in Fig. \ref{motivation}, 
+As illustrate in Fig. \ref{motivation_b}, 
 we observe similar error accumulation in our motivation experiment. 
 The dark dot is the slope gradient calculated by the accelerometer.
 The curve of gyroscope measures the accumulated angular changes  
